@@ -1,7 +1,8 @@
 plugins {
-    id('com.android.application')
+    id 'com.android.application'
+    id 'org.jetbrains.kotlin.android'
     id('com.github.triplet.play') version '2.2.0'
-    id('com.google.firebase.crashlytics')
+    id 'com.google.firebase.crashlytics'
 }
 
 ext.firebaseUIVersion = "6.3.0"
@@ -12,11 +13,11 @@ def playTrack = System.getenv('PLAY_TRACK') ?: 'alpha'
 
 android {
     namespace 'com.move4mobile.lichtstad'
-    compileSdkVersion 33
+    compileSdk 33
     defaultConfig {
         applicationId "nl.gramsbergen.oranjevereniging.lichtstad"
-        minSdkVersion 21
-        targetSdkVersion 33
+        minSdk 21
+        targetSdk 33
         versionCode buildNumber
         versionName "2022.1"
         resConfigs 'nl'
