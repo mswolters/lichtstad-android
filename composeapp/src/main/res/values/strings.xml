@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="app_name">Lichtstad</string>
+    <string name="menu_program">Programma</string>
+    <string name="menu_results">Uitslagen</string>
+    <string name="menu_photos">Foto\'s</string>
+    <string name="menu_videos">Video\'s</string>
+    <string name="menu_map">Route</string>
 </resources>

@@ -18,49 +18,30 @@ class IconSet(
     share: @Composable () -> Painter,
     play: @Composable () -> Painter,
 ) {
-    var program by mutableStateOf(program)
-        internal set
-    var result by mutableStateOf(result)
-        internal set
-    var photo by mutableStateOf(photo)
-        internal set
-    var video by mutableStateOf(video)
-        internal set
-    var map by mutableStateOf(map)
-        internal set
-    var favorite by mutableStateOf(favorite)
-        internal set
-    var share by mutableStateOf(share)
-        internal set
-    var play by mutableStateOf(play)
-        internal set
-
-    fun copy(
-        program: @Composable () -> Painter = this.program,
-        result: @Composable () -> Painter = this.result,
-        photo: @Composable () -> Painter = this.photo,
-        video: @Composable () -> Painter = this.video,
-        map: @Composable () -> Painter = this.map,
-        favorite: @Composable (selected: Boolean) -> Painter = this.favorite,
-        share: @Composable () -> Painter = this.share,
-        play: @Composable () -> Painter = this.play
-    ): IconSet = IconSet (
-        program = program,
-        result = result,
-        photo = photo,
-        video = video,
-        map = map,
-        favorite = favorite,
-        share = share,
-        play = play,
-    )
+    val program by mutableStateOf(program)
+    val result by mutableStateOf(result)
+    val photo by mutableStateOf(photo)
+    val video by mutableStateOf(video)
+    val map by mutableStateOf(map)
+    val favorite by mutableStateOf(favorite)
+    val share by mutableStateOf(share)
+    val play by mutableStateOf(play)
 
     override fun toString(): String {
-        return "IconSet(program=$program, result=$result, photo=$photo, video=$video, map=$map, favorite=$favorite, share=$share, play=$play)"
+        return "IconSet(" +
+                "program=$program, " +
+                "result=$result, " +
+                "photo=$photo, " +
+                "video=$video, " +
+                "map=$map, " +
+                "favorite=$favorite, " +
+                "share=$share, " +
+                "play=$play" +
+                ")"
     }
 }
 
-fun lichtstadIconSet (
+fun lichtstadIconSet(
     program: @Composable () -> Painter = { rememberVectorPainter(Icons.Outlined.Assignment) },
     result: @Composable () -> Painter = { rememberVectorPainter(Icons.Filled.EmojiEvents) },
     photo: @Composable () -> Painter = { rememberVectorPainter(Icons.Filled.PhotoLibrary) },
@@ -72,7 +53,7 @@ fun lichtstadIconSet (
     },
     share: @Composable () -> Painter = { rememberVectorPainter(Icons.Filled.Share) },
     play: @Composable () -> Painter = { rememberVectorPainter(Icons.Filled.PlayArrow) }
-): IconSet = IconSet (
+): IconSet = IconSet(
     program = program,
     result = result,
     photo = photo,
@@ -82,16 +63,5 @@ fun lichtstadIconSet (
     share = share,
     play = play,
 )
-
-internal fun IconSet.updateIconSetFrom(other: IconSet) {
-    program = other.program
-    result = other.result
-    photo = other.photo
-    video = other.video
-    map = other.map
-    favorite = other.favorite
-    share = other.share
-    play = other.play
-}
 
 internal val LocalIconSet = staticCompositionLocalOf { lichtstadIconSet() }

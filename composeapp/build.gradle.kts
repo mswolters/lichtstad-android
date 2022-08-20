@@ -4,6 +4,7 @@ plugins {
 }
 
 val composeVersion = "1.2.1"
+val accompanistVersion  = "0.26.1-alpha"
 
 android {
     namespace = "com.move4mobile.lichtstad"
@@ -42,7 +43,7 @@ android {
     productFlavors {
         create("lichtstad") {
             dimension = "whitelabel"
-            applicationId = "nl.gramsbergen.oranjevereniging.lichtstad"
+            applicationId = "nl.gramsbergen.oranjevereniging.lichtstad.compose"
         }
     }
 }
@@ -60,6 +61,8 @@ dependencies {
 
     implementation("androidx.compose.material3:material3:1.0.0-alpha16")
     implementation("androidx.compose.material3:material3-window-size-class:1.0.0-alpha16")
+
+    implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
 
     implementation("androidx.activity:activity-compose:1.5.1")
 
