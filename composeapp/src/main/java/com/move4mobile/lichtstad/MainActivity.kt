@@ -1,15 +1,19 @@
+@file:OptIn(ExperimentalMaterial3Api::class)
+
 package com.move4mobile.lichtstad
 
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import com.move4mobile.lichtstad.ui.main.MainContent
 import com.move4mobile.lichtstad.ui.theme.ProgramTheme
 import com.move4mobile.lichtstad.ui.theme.ResultTheme
 
@@ -33,12 +37,4 @@ class MainActivity : ComponentActivity() {
 @Composable
 fun Greeting(name: String) {
     Text(text = "Hello $name!")
-}
-
-@Preview(showBackground = true)
-@Composable
-fun DefaultPreview() {
-    ResultTheme {
-        Greeting("Android")
-    }
 }

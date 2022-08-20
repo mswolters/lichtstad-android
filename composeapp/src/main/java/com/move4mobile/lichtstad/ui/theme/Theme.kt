@@ -11,6 +11,9 @@ import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
@@ -21,13 +24,35 @@ import androidx.compose.ui.unit.sp
 @Preview(name = "Dark mode", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
 annotation class PreviewThemes
 
+object LichtstadTheme {
+
+    val iconSet: IconSet
+        @Composable
+        @ReadOnlyComposable
+        get() = LocalIconSet.current
+
+}
+
 @Composable
-fun LichtstadTheme(colorScheme: ColorScheme, content: @Composable () -> Unit) {
-    MaterialTheme(
-        colorScheme = colorScheme,
-        typography = Typography,
-        content = content
-    )
+fun LichtstadTheme(
+    colorScheme: ColorScheme,
+    iconSet: IconSet = lichtstadIconSet(),
+    content: @Composable () -> Unit
+) {
+    val rememberedIconSet = remember {
+        iconSet.copy()
+    }.apply {
+        updateIconSetFrom(iconSet)
+    }
+    CompositionLocalProvider(
+        LocalIconSet provides rememberedIconSet
+    ) {
+        MaterialTheme(
+            colorScheme = colorScheme,
+            typography = Typography,
+            content = content
+        )
+    }
 }
 
 @Composable

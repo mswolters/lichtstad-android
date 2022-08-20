@@ -2,6 +2,7 @@ package com.move4mobile.lichtstad.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
+import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
@@ -22,6 +23,7 @@ fun lichtstadColorScheme(
     } else {
         Scheme.light(blended)
     }
+    lightColorScheme()
     return ColorScheme(
         primary = Color(scheme.primary),
         onPrimary = Color(scheme.onPrimary),

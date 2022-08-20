@@ -55,6 +55,8 @@ dependencies {
     implementation("androidx.core:core-ktx:1.8.0")
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
+    //HUGE AND LARGE, make sure minify strips unused icons!
+    implementation("androidx.compose.material:material-icons-extended:$composeVersion")
 
     implementation("androidx.compose.material3:material3:1.0.0-alpha16")
     implementation("androidx.compose.material3:material3-window-size-class:1.0.0-alpha16")
