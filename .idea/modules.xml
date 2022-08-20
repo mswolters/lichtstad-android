@@ -7,6 +7,13 @@
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/lichtstad-android.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/lichtstad-android.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/lichtstad-android.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/lichtstad-android.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/lichtstad-android.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/lichtstad-android.app.unitTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/composeapp/lichtstad-android.composeapp.iml" filepath="$PROJECT_DIR$/.idea/modules/composeapp/lichtstad-android.composeapp.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/composeapp/lichtstad-android.composeapp.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/composeapp/lichtstad-android.composeapp.androidTest.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/composeapp/lichtstad-android.composeapp.main.iml" filepath="$PROJECT_DIR$/.idea/modules/composeapp/lichtstad-android.composeapp.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/composeapp/material-color-utilities/lichtstad-android.composeapp.material-color-utilities.iml" filepath="$PROJECT_DIR$/.idea/modules/composeapp/material-color-utilities/lichtstad-android.composeapp.material-color-utilities.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/composeapp/material-color-utilities/lichtstad-android.composeapp.material-color-utilities.main.iml" filepath="$PROJECT_DIR$/.idea/modules/composeapp/material-color-utilities/lichtstad-android.composeapp.material-color-utilities.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/composeapp/material-color-utilities/lichtstad-android.composeapp.material-color-utilities.test.iml" filepath="$PROJECT_DIR$/.idea/modules/composeapp/material-color-utilities/lichtstad-android.composeapp.material-color-utilities.test.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/composeapp/lichtstad-android.composeapp.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/composeapp/lichtstad-android.composeapp.unitTest.iml" />
     </modules>
   </component>
 </project>

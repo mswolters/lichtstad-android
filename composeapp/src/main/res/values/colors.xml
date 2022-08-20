@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ic_launcher_background">#0031BB</color>
+
+    <color name="primary_program">#F47216</color>
+    <color name="primary_result">#0031BB</color>
+    <color name="primary_photo">#E71717</color>
+    <color name="primary_video">#000000</color>
+    <color name="primary_map">#009933</color>
+</resources>
