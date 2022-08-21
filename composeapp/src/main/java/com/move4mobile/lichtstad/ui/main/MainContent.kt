@@ -5,7 +5,7 @@ import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.SideEffect
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -13,6 +13,7 @@ import androidx.compose.ui.graphics.luminance
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavController
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
@@ -21,45 +22,48 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.move4mobile.lichtstad.ui.i18n.Translations
 import com.move4mobile.lichtstad.ui.theme.LichtstadTheme
+import com.move4mobile.lichtstad.ui.theme.ThemeViewModel
 
 @ExperimentalMaterial3Api
 @Composable
-fun MainContent(modifier: Modifier = Modifier) {
+fun MainContent(
+    modifier: Modifier = Modifier,
+    themeViewModel: ThemeViewModel = viewModel(),
+    navigationItems: List<NavigationItem> = NAVIGATION_ITEMS
+) {
     val navController = rememberNavController()
-    NavHost(navController = navController, startDestination = ROUTE_DEFAULT) {
-        NAVIGATION_ITEMS.forEach { item ->
-            composable(item.route) {
-                item.theme {
-                    Content(
-                        modifier = modifier,
-                        navigationItems = NAVIGATION_ITEMS,
-                        navController = navController,
-                        content = item.content
-                    )
+    LaunchedEffect(navController) {
+        navController.addOnDestinationChangedListener { controller, destination, bundle ->
+            themeViewModel.activeTheme =
+                navigationItems.single { it.route == destination.route!! }.theme
+        }
+    }
+    LichtstadTheme(
+        themeViewModel = themeViewModel,
+    ) {
+        TintSystemBars()
+
+        Scaffold(
+            modifier = modifier,
+            topBar = { TopBar() },
+            bottomBar = {
+                BottomBar(
+                    navigationItems = navigationItems,
+                    navController = navController
+                )
+            },
+        ) { paddingValues ->
+            Surface(Modifier.padding(paddingValues)) {
+                NavHost(navController = navController, startDestination = ROUTE_DEFAULT) {
+                    navigationItems.forEach { item ->
+                        composable(item.route) {
+                            item.content()
+                        }
+                    }
                 }
             }
         }
-    }
-}
 
-@ExperimentalMaterial3Api
-@Composable
-private fun Content(
-    modifier: Modifier = Modifier,
-    navigationItems: List<NavigationItem>,
-    navController: NavController,
-    content: @Composable () -> Unit
-) {
-    TintSystemBars()
-
-    Scaffold(
-        modifier = modifier,
-        topBar = { TopBar() },
-        bottomBar = { BottomBar(navigationItems = navigationItems, navController = navController) },
-    ) { paddingValues ->
-        Surface(Modifier.padding(paddingValues)) {
-            content()
-        }
     }
 }
 
@@ -78,7 +82,7 @@ private fun TopBar() {
             )
         },
         colors = TopAppBarDefaults.smallTopAppBarColors(
-            containerColor = MaterialTheme.colorScheme.primary,
+            containerColor = Color.Transparent, //Already handled by modifier above, which draws behind system bar
             titleContentColor = MaterialTheme.colorScheme.onPrimary,
             navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
         ),
@@ -86,7 +90,11 @@ private fun TopBar() {
 }
 
 @Composable
-private fun BottomBar(navigationItems: List<NavigationItem>, navController: NavController) {
+private fun BottomBar(
+    navigationItems: List<NavigationItem>,
+    navController: NavController,
+    themeViewModel: ThemeViewModel = viewModel(),
+) {
     Box(
         modifier = Modifier
             // Why 3? Dunno, but it works. Why can't compose handle this for me
@@ -94,9 +102,12 @@ private fun BottomBar(navigationItems: List<NavigationItem>, navController: NavC
             .navigationBarsPadding()
     ) {
         NavigationBar {
-            navigationItems.forEach { item ->
+            navigationItems.forEachIndexed { index, item ->
+                // TODO: Ugly, scary. change this
+                val selected = index == themeViewModel.activeTheme.ordinal
                 NavigationBarItem(
-                    selected = false,
+                    modifier = Modifier.weight(1f),
+                    selected = selected,
                     onClick = {
                         navController.navigate(item.route) {
                             popUpTo(navController.graph.findStartDestination().id) {
@@ -109,7 +120,7 @@ private fun BottomBar(navigationItems: List<NavigationItem>, navController: NavC
                     icon = {
                         Icon(painter = item.icon(), contentDescription = null)
                     },
-                    label = { Text(item.title()) })
+                )
             }
         }
     }
@@ -134,7 +145,7 @@ private fun TintSystemBars() {
         // Same as above, but 0.5. I can't be asked to find out where this is coming from, so here you go
         Color.Black.copy(alpha = 0.5f)
     }
-    SideEffect {
+    LaunchedEffect(darkStatusIcons, darkNavigationIcons, navbarShimColor) {
         systemUiController.setStatusBarColor(
             color = Color.Transparent,
             darkIcons = darkStatusIcons

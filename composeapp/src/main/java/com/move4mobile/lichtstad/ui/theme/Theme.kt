@@ -10,14 +10,14 @@ import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
-import androidx.compose.runtime.ReadOnlyComposable
+import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.lifecycle.ViewModel
 
 @Preview(name = "Light mode", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Preview(name = "Dark mode", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
@@ -32,6 +32,19 @@ object LichtstadTheme {
 
 }
 
+class ThemeViewModel : ViewModel() {
+
+    var activeTheme: Theme by mutableStateOf(Theme.values()[0])
+
+}
+
+enum class Theme(val colorScheme: @Composable () -> ColorScheme) {
+    Program({ programColorScheme() }),
+    Result({ resultColorScheme() }),
+    Photo({ photoColorScheme() }),
+    Video({ videoColorScheme() }),
+    Map({ mapColorScheme() }),
+}
 
 @Composable
 fun LichtstadTheme(
@@ -43,7 +56,7 @@ fun LichtstadTheme(
         LocalIconSet provides iconSet
     ) {
         MaterialTheme(
-            colorScheme = colorScheme,
+            colorScheme = colorScheme.animated(),
             typography = Typography,
             content = content
         )
@@ -51,46 +64,14 @@ fun LichtstadTheme(
 }
 
 @Composable
-fun ProgramTheme(content: @Composable () -> Unit) {
-    val colorScheme = programColorScheme()
+fun LichtstadTheme(
+    themeViewModel: ThemeViewModel = viewModel(),
+    iconSet: IconSet = lichtstadIconSet(),
+    content: @Composable () -> Unit
+) {
     LichtstadTheme(
-        colorScheme = colorScheme,
-        content = content
-    )
-}
-
-@Composable
-fun ResultTheme(content: @Composable () -> Unit) {
-    val colorScheme = resultColorScheme()
-    LichtstadTheme(
-        colorScheme = colorScheme,
-        content = content
-    )
-}
-
-@Composable
-fun PhotoTheme(content: @Composable () -> Unit) {
-    val colorScheme = photoColorScheme()
-    LichtstadTheme(
-        colorScheme = colorScheme,
-        content = content
-    )
-}
-
-@Composable
-fun VideoTheme(content: @Composable () -> Unit) {
-    val colorScheme = videoColorScheme()
-    LichtstadTheme(
-        colorScheme = colorScheme,
-        content = content
-    )
-}
-
-@Composable
-fun MapTheme(content: @Composable () -> Unit) {
-    val colorScheme = mapColorScheme()
-    LichtstadTheme(
-        colorScheme = colorScheme,
+        colorScheme = themeViewModel.activeTheme.colorScheme(),
+        iconSet = iconSet,
         content = content
     )
 }
@@ -98,7 +79,7 @@ fun MapTheme(content: @Composable () -> Unit) {
 @Composable
 @PreviewThemes
 private fun ProgramThemePreview() {
-    ProgramTheme {
+    LichtstadTheme(colorScheme = programColorScheme()) {
         PreviewBoxes()
     }
 }
@@ -106,7 +87,7 @@ private fun ProgramThemePreview() {
 @Composable
 @PreviewThemes
 private fun ResultThemePreview() {
-    ResultTheme {
+    LichtstadTheme(colorScheme = resultColorScheme()) {
         PreviewBoxes()
     }
 }
@@ -114,7 +95,7 @@ private fun ResultThemePreview() {
 @Composable
 @PreviewThemes
 private fun PhotoThemePreview() {
-    PhotoTheme {
+    LichtstadTheme(colorScheme = photoColorScheme()) {
         PreviewBoxes()
     }
 }
@@ -122,7 +103,7 @@ private fun PhotoThemePreview() {
 @Composable
 @PreviewThemes
 private fun VideoThemePreview() {
-    VideoTheme {
+    LichtstadTheme(colorScheme = videoColorScheme()) {
         PreviewBoxes()
     }
 }
@@ -130,7 +111,7 @@ private fun VideoThemePreview() {
 @Composable
 @PreviewThemes
 private fun MapThemePreview() {
-    MapTheme {
+    LichtstadTheme(colorScheme = mapColorScheme()) {
         PreviewBoxes()
     }
 }
