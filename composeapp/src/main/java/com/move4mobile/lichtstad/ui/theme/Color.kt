@@ -23,7 +23,6 @@ fun lichtstadColorScheme(
     } else {
         Scheme.light(blended)
     }
-    lightColorScheme()
     return ColorScheme(
         primary = Color(scheme.primary),
         onPrimary = Color(scheme.onPrimary),
