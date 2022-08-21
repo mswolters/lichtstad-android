@@ -17,9 +17,7 @@ class MainActivity : ComponentActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
         setContent {
             Translations {
-                ResultTheme {
-                    MainContent()
-                }
+                MainContent()
             }
         }
     }

@@ -8,6 +8,8 @@ import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.graphics.vector.rememberVectorPainter
 
 @Stable
+// Using functions like this instead of the ImageVector directly allows us to use
+// xml vector drawables or bitmaps if we want as well.
 class IconSet(
     program: @Composable () -> Painter,
     result: @Composable () -> Painter,
