@@ -20,6 +20,7 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.move4mobile.lichtstad.ui.component.FlexibleNavigationBar
 import com.move4mobile.lichtstad.ui.i18n.Translations
 import com.move4mobile.lichtstad.ui.theme.LichtstadTheme
 import com.move4mobile.lichtstad.ui.theme.ThemeViewModel
@@ -97,17 +98,18 @@ private fun BottomBar(
 ) {
     Box(
         modifier = Modifier
-            // Why 3? Dunno, but it works. Why can't compose handle this for me
-            .background(MaterialTheme.colorScheme.surfaceColorAtElevation(3.dp))
+            .background(MaterialTheme.colorScheme.surfaceColorAtElevation(NavigationBarDefaults.Elevation))
             .navigationBarsPadding()
     ) {
-        NavigationBar {
+        // Because we have 5 items which is more than material recommends the titles don't fit with default item padding
+        // Still breaks on the smallest screens when text is more than 7m wide, but that can't be helped
+        FlexibleNavigationBar(itemPadding = 0.dp) {
             navigationItems.forEachIndexed { index, item ->
                 // TODO: Ugly, scary. change this
                 val selected = index == themeViewModel.activeTheme.ordinal
                 NavigationBarItem(
-                    modifier = Modifier.weight(1f),
                     selected = selected,
+                    alwaysShowLabel = false,
                     onClick = {
                         navController.navigate(item.route) {
                             popUpTo(navController.graph.findStartDestination().id) {
@@ -119,6 +121,9 @@ private fun BottomBar(
                     },
                     icon = {
                         Icon(painter = item.icon(), contentDescription = null)
+                    },
+                    label = {
+                        Text(item.title())
                     },
                 )
             }
