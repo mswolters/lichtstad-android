@@ -18,6 +18,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.lifecycle.ViewModel
+import com.move4mobile.lichtstad.ui.main.NavigationViewModel
 
 @Preview(name = "Light mode", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Preview(name = "Dark mode", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)
@@ -29,12 +30,6 @@ object LichtstadTheme {
         @Composable
         @ReadOnlyComposable
         get() = LocalIconSet.current
-
-}
-
-class ThemeViewModel : ViewModel() {
-
-    var activeTheme: Theme by mutableStateOf(Theme.values()[0])
 
 }
 
@@ -65,12 +60,12 @@ fun LichtstadTheme(
 
 @Composable
 fun LichtstadTheme(
-    themeViewModel: ThemeViewModel = viewModel(),
+    navigationViewModel: NavigationViewModel = viewModel(),
     iconSet: IconSet = lichtstadIconSet(),
     content: @Composable () -> Unit
 ) {
     LichtstadTheme(
-        colorScheme = themeViewModel.activeTheme.colorScheme(),
+        colorScheme = navigationViewModel.activeNavigationItem.theme.colorScheme(),
         iconSet = iconSet,
         content = content
     )

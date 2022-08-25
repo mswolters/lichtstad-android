@@ -23,24 +23,23 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.move4mobile.lichtstad.ui.component.FlexibleNavigationBar
 import com.move4mobile.lichtstad.ui.i18n.Translations
 import com.move4mobile.lichtstad.ui.theme.LichtstadTheme
-import com.move4mobile.lichtstad.ui.theme.ThemeViewModel
 
 @ExperimentalMaterial3Api
 @Composable
 fun MainContent(
     modifier: Modifier = Modifier,
-    themeViewModel: ThemeViewModel = viewModel(),
+    navigationViewModel: NavigationViewModel = viewModel(),
     navigationItems: List<NavigationItem> = NAVIGATION_ITEMS
 ) {
     val navController = rememberNavController()
     LaunchedEffect(navController) {
         navController.addOnDestinationChangedListener { controller, destination, bundle ->
-            themeViewModel.activeTheme =
-                navigationItems.single { it.route == destination.route!! }.theme
+            navigationViewModel.activeNavigationItem =
+                navigationItems.single { it.route == destination.route }
         }
     }
     LichtstadTheme(
-        themeViewModel = themeViewModel,
+        navigationViewModel = navigationViewModel,
     ) {
         TintSystemBars()
 
@@ -70,16 +69,17 @@ fun MainContent(
 
 @ExperimentalMaterial3Api
 @Composable
-private fun TopBar() {
+private fun TopBar(navigationViewModel: NavigationViewModel = viewModel()) {
     SmallTopAppBar(
         modifier = Modifier
             .background(MaterialTheme.colorScheme.primary)
             .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)),
-        title = { Text("Hai") },
+        title = { Text(navigationViewModel.activeNavigationItem.title()) },
         navigationIcon = {
             Icon(
-                painter = LichtstadTheme.iconSet.program(),
-                contentDescription = null
+                painter = navigationViewModel.activeNavigationItem.icon(),
+                contentDescription = null,
+                modifier = Modifier.padding(horizontal = 8.dp).size(32.dp)
             )
         },
         colors = TopAppBarDefaults.smallTopAppBarColors(
@@ -94,7 +94,7 @@ private fun TopBar() {
 private fun BottomBar(
     navigationItems: List<NavigationItem>,
     navController: NavController,
-    themeViewModel: ThemeViewModel = viewModel(),
+    navigationViewModel: NavigationViewModel = viewModel(),
 ) {
     Box(
         modifier = Modifier
@@ -104,9 +104,8 @@ private fun BottomBar(
         // Because we have 5 items which is more than material recommends the titles don't fit with default item padding
         // Still breaks on the smallest screens when text is more than 7m wide, but that can't be helped
         FlexibleNavigationBar(itemPadding = 0.dp) {
-            navigationItems.forEachIndexed { index, item ->
-                // TODO: Ugly, scary. change this
-                val selected = index == themeViewModel.activeTheme.ordinal
+            navigationItems.forEach { item ->
+                val selected = item == navigationViewModel.activeNavigationItem
                 NavigationBarItem(
                     selected = selected,
                     alwaysShowLabel = false,

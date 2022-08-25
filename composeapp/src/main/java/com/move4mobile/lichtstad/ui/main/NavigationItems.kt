@@ -1,5 +1,7 @@
 package com.move4mobile.lichtstad.ui.main
 
+import androidx.compose.runtime.*
+import androidx.lifecycle.ViewModel
 import com.move4mobile.lichtstad.ui.i18n.Translations
 import com.move4mobile.lichtstad.ui.theme.*
 
@@ -47,3 +49,9 @@ val NAVIGATION_ITEMS = listOf(
         content = {  }
     ),
 )
+
+class NavigationViewModel : ViewModel() {
+
+    var activeNavigationItem: NavigationItem by mutableStateOf(NAVIGATION_ITEMS[0])
+
+}
