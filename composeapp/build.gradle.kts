@@ -1,10 +1,11 @@
 plugins {
     id("com.android.application")
     kotlin("android")
+    id("kotlin-parcelize")
 }
 
 val composeVersion = "1.2.1"
-val accompanistVersion  = "0.26.1-alpha"
+val accompanistVersion  = "0.26.3-beta"
 
 android {
     namespace = "com.move4mobile.lichtstad"
@@ -36,7 +37,7 @@ android {
     }
     composeOptions {
         //kotlinCompilerExtensionVersion = composeVersion
-        kotlinCompilerExtensionVersion = "1.3.0"
+        kotlinCompilerExtensionVersion = "1.3.1"
     }
 
     flavorDimensions += "whitelabel"
@@ -53,22 +54,26 @@ dependencies {
     // Check https://github.com/material-foundation/material-color-utilities
     implementation(project(":composeapp:material-color-utilities"))
 
-    implementation("androidx.core:core-ktx:1.8.0")
+    implementation("androidx.core:core-ktx:1.9.0")
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
     //HUGE AND LARGE, make sure minify strips unused icons!
     implementation("androidx.compose.material:material-icons-extended:$composeVersion")
 
-    implementation("androidx.compose.material3:material3:1.0.0-alpha16")
-    implementation("androidx.compose.material3:material3-window-size-class:1.0.0-alpha16")
+    implementation("androidx.compose.material3:material3:1.0.0-beta02")
+    implementation("androidx.compose.material3:material3-window-size-class:1.0.0-beta02")
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
 
     implementation("androidx.activity:activity-compose:1.5.1")
 
-    implementation("androidx.navigation:navigation-compose:2.5.1")
+    implementation("androidx.navigation:navigation-compose:2.5.2")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
+
+    implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
+
+    implementation("io.coil-kt:coil-compose:2.2.1")
 
     debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$composeVersion")

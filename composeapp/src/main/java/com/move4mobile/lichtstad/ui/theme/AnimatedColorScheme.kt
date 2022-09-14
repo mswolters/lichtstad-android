@@ -2,13 +2,15 @@ package com.move4mobile.lichtstad.ui.theme
 
 import androidx.compose.animation.animateColorAsState
 import androidx.compose.animation.core.AnimationSpec
+import androidx.compose.animation.core.Spring
+import androidx.compose.animation.core.spring
 import androidx.compose.animation.core.tween
 import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.graphics.Color
 
 @Composable
-fun ColorScheme.animated(animationSpec: AnimationSpec<Color> = tween()): ColorScheme {
+fun ColorScheme.animated(animationSpec: AnimationSpec<Color> = spring(stiffness = Spring.StiffnessMediumLow)): ColorScheme {
     return ColorScheme(
         primary = primary.animate(animationSpec),
         onPrimary = onPrimary.animate(animationSpec),

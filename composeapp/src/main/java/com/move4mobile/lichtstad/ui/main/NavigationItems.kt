@@ -1,8 +1,9 @@
 package com.move4mobile.lichtstad.ui.main
 
 import androidx.compose.runtime.*
+import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
-import com.move4mobile.lichtstad.ui.i18n.Translations
+import com.move4mobile.lichtstad.R
 import com.move4mobile.lichtstad.ui.theme.*
 
 const val ROUTE_PROGRAM = "program"
@@ -15,35 +16,35 @@ const val ROUTE_DEFAULT = ROUTE_PROGRAM
 val NAVIGATION_ITEMS = listOf(
     NavigationItem(
         route = ROUTE_PROGRAM,
-        title = { Translations.translationSet.menuProgram },
+        title = { stringResource(R.string.menu_program) },
         icon = { LichtstadTheme.iconSet.program() },
         theme = Theme.Program,
         content = {  }
     ),
     NavigationItem(
         route = ROUTE_RESULTS,
-        title = { Translations.translationSet.menuResults },
+        title = { stringResource(R.string.menu_results) },
         icon = { LichtstadTheme.iconSet.result() },
         theme = Theme.Result,
         content = {  }
     ),
     NavigationItem(
         route = ROUTE_PHOTOS,
-        title = { Translations.translationSet.menuPhotos },
+        title = { stringResource(R.string.menu_photos) },
         icon = { LichtstadTheme.iconSet.photo() },
         theme = Theme.Photo,
         content = {  }
     ),
     NavigationItem(
         route = ROUTE_VIDEOS,
-        title = { Translations.translationSet.menuVideos },
+        title = { stringResource(R.string.menu_videos) },
         icon = { LichtstadTheme.iconSet.video() },
         theme = Theme.Video,
         content = {  }
     ),
     NavigationItem(
         route = ROUTE_MAP,
-        title = { Translations.translationSet.menuMap },
+        title = { stringResource(R.string.menu_map) },
         icon = { LichtstadTheme.iconSet.map() },
         theme = Theme.Map,
         content = {  }

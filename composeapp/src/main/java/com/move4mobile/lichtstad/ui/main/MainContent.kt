@@ -21,7 +21,6 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.move4mobile.lichtstad.ui.component.FlexibleNavigationBar
-import com.move4mobile.lichtstad.ui.i18n.Translations
 import com.move4mobile.lichtstad.ui.theme.LichtstadTheme
 
 @ExperimentalMaterial3Api
@@ -70,20 +69,19 @@ fun MainContent(
 @ExperimentalMaterial3Api
 @Composable
 private fun TopBar(navigationViewModel: NavigationViewModel = viewModel()) {
-    SmallTopAppBar(
-        modifier = Modifier
-            .background(MaterialTheme.colorScheme.primary)
-            .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal + WindowInsetsSides.Top)),
+    TopAppBar(
         title = { Text(navigationViewModel.activeNavigationItem.title()) },
         navigationIcon = {
             Icon(
                 painter = navigationViewModel.activeNavigationItem.icon(),
                 contentDescription = null,
-                modifier = Modifier.padding(horizontal = 8.dp).size(32.dp)
+                modifier = Modifier
+                    .padding(horizontal = 8.dp)
+                    .size(32.dp)
             )
         },
         colors = TopAppBarDefaults.smallTopAppBarColors(
-            containerColor = Color.Transparent, //Already handled by modifier above, which draws behind system bar
+            containerColor = MaterialTheme.colorScheme.primary,
             titleContentColor = MaterialTheme.colorScheme.onPrimary,
             navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
         ),
@@ -165,7 +163,5 @@ private fun TintSystemBars() {
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {
-    Translations {
-        MainContent()
-    }
+    MainContent()
 }

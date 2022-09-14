@@ -17,6 +17,7 @@ class IconSet(
     video: @Composable () -> Painter,
     map: @Composable () -> Painter,
     favorite: @Composable (selected: Boolean) -> Painter,
+    location: @Composable () -> Painter,
     share: @Composable () -> Painter,
     play: @Composable () -> Painter,
 ) {
@@ -26,6 +27,7 @@ class IconSet(
     val video by mutableStateOf(video)
     val map by mutableStateOf(map)
     val favorite by mutableStateOf(favorite)
+    val location by mutableStateOf(location)
     val share by mutableStateOf(share)
     val play by mutableStateOf(play)
 
@@ -53,6 +55,7 @@ fun lichtstadIconSet(
         if (selected) rememberVectorPainter(Icons.Filled.Favorite)
         else rememberVectorPainter(Icons.Filled.FavoriteBorder)
     },
+    location: @Composable () -> Painter = { rememberVectorPainter(Icons.Filled.LocationOn) },
     share: @Composable () -> Painter = { rememberVectorPainter(Icons.Filled.Share) },
     play: @Composable () -> Painter = { rememberVectorPainter(Icons.Filled.PlayArrow) }
 ): IconSet = IconSet(
@@ -62,6 +65,7 @@ fun lichtstadIconSet(
     video = video,
     map = map,
     favorite = favorite,
+    location = location,
     share = share,
     play = play,
 )

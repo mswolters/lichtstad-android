@@ -6,4 +6,8 @@
     <string name="menu_photos">Foto\'s</string>
     <string name="menu_videos">Video\'s</string>
     <string name="menu_map">Route</string>
+
+    <string name="program_item_location">Locatie</string>
+    <string name="program_item_image_description_pattern">Sfeerimpressie %s</string>
+
 </resources>
