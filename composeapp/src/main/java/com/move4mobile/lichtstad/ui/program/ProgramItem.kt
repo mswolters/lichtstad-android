@@ -1,5 +1,6 @@
 package com.move4mobile.lichtstad.ui.program
 
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
@@ -19,10 +20,14 @@ import coil.compose.rememberAsyncImagePainter
 import com.move4mobile.lichtstad.R
 import com.move4mobile.lichtstad.model.Location
 import com.move4mobile.lichtstad.model.Program
+import com.move4mobile.lichtstad.ui.component.CustomizableCheckbox
 import com.move4mobile.lichtstad.ui.formatHoursMinutes
 import com.move4mobile.lichtstad.ui.noIntrinsicHeight
+import com.move4mobile.lichtstad.ui.theme.IconSet
 import com.move4mobile.lichtstad.ui.theme.LichtstadTheme
+import com.move4mobile.lichtstad.ui.theme.programColorScheme
 import kotlinx.datetime.LocalDateTime
+import kotlin.math.exp
 
 @ExperimentalMaterial3Api
 @Composable
@@ -64,8 +69,8 @@ fun ProgramItem(
                     if (!program.location?.name.isNullOrEmpty()) {
                         Row(
                             modifier = Modifier
+                                .alpha(0.7f)
                                 .height(IntrinsicSize.Min)
-                                .alpha(0.70f)
                         ) {
                             Image(
                                 painter = LichtstadTheme.iconSet.location(),
@@ -78,17 +83,19 @@ fun ProgramItem(
                                 color = MaterialTheme.colorScheme.onPrimaryContainer,
                             )
                         }
+
                     }
                 }
                 Spacer(modifier = Modifier.weight(1f))
-                // TODO: Roll custom checkbox so we can use custom image
-                Checkbox(
-                    modifier = Modifier.size(24.dp),
+                CustomizableCheckbox(
                     checked = isFavorite,
-                    onCheckedChange = onFavoriteClick
+                    modifier = Modifier.size(24.dp),
+                    onCheckedChanged = onFavoriteClick,
+                    checkedImage = LichtstadTheme.iconSet.favorite(true),
+                    uncheckedImage = LichtstadTheme.iconSet.favorite(false),
                 )
             }
-            if (expanded) {
+            AnimatedVisibility(visible = expanded) {
                 Row(
                     modifier = Modifier
                         .padding(top = 4.dp)
@@ -127,18 +134,22 @@ fun ProgramItem(
 @Preview
 @Composable
 private fun PreviewProgramItem() {
-    var isFavorite by remember { mutableStateOf(false) }
-    ProgramItem(
-        program = Program(
-            title = "Officiële opening",
-            key = "abcdlfa",
-            description = "Officiële opening van Gramsbergen Lichtstad 2022",
-            location = Location("Vijver"),
-            time = LocalDateTime(2022, 8, 26, 20, 0),
-            imageUrl = "https://lichtstad-prd.s3.eu-west-1.amazonaws.com/program/2022/6481c559/1662976806126.jpg",
-        ),
-        expanded = true,
-        isFavorite = isFavorite,
-        onFavoriteClick = { isFavorite = !isFavorite }
-    )
+    LichtstadTheme(programColorScheme()) {
+        var isFavorite by remember { mutableStateOf(false) }
+        var expanded by remember { mutableStateOf(false) }
+        ProgramItem(
+            program = Program(
+                title = "Officiële opening",
+                key = "abcdlfa",
+                description = "Officiële opening van Gramsbergen Lichtstad 2022",
+                location = Location("Vijver"),
+                time = LocalDateTime(2022, 8, 26, 20, 0),
+                imageUrl = "https://lichtstad-prd.s3.eu-west-1.amazonaws.com/program/2022/6481c559/1662976806126.jpg",
+            ),
+            expanded = expanded,
+            isFavorite = isFavorite,
+            onFavoriteClick = { isFavorite = !isFavorite },
+            onClick = { expanded = !expanded }
+        )
+    }
 }

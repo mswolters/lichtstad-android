@@ -3,6 +3,7 @@ package com.move4mobile.lichtstad.ui.theme
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.colorResource
@@ -11,6 +12,7 @@ import com.move4mobile.lichtstad.R
 import scheme.Scheme
 
 @Composable
+@Stable
 fun lichtstadColorScheme(
     primary: Color,
     harmonize: Color = primary,
@@ -56,9 +58,20 @@ fun lichtstadColorScheme(
 }
 
 @Composable
-fun programColorScheme() = lichtstadColorScheme(
-    colorResource(id = R.color.primary_program)
-)
+fun programColorScheme(): ColorScheme {
+    val baseScheme = lichtstadColorScheme(
+        colorResource(id = R.color.primary_program)
+    )
+    val secondaryScheme = lichtstadColorScheme(
+        colorResource(id = R.color.secondary_program)
+    )
+    return baseScheme.copy(
+        tertiary = secondaryScheme.primary,
+        onTertiary = secondaryScheme.onPrimary,
+        tertiaryContainer = secondaryScheme.primaryContainer,
+        onTertiaryContainer = secondaryScheme.onPrimaryContainer
+    )
+}
 
 @Composable
 fun resultColorScheme() = lichtstadColorScheme(
