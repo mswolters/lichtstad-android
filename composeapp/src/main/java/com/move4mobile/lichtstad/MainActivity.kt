@@ -1,5 +1,3 @@
-@file:OptIn(ExperimentalMaterial3Api::class)
-
 package com.move4mobile.lichtstad
 
 import android.os.Bundle

@@ -2,11 +2,14 @@ package com.move4mobile.lichtstad.ui.program
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
@@ -29,22 +32,19 @@ import com.move4mobile.lichtstad.ui.theme.programColorScheme
 import kotlinx.datetime.LocalDateTime
 import kotlin.math.exp
 
-@ExperimentalMaterial3Api
 @Composable
 fun ProgramItem(
     program: Program,
     modifier: Modifier = Modifier,
-    expanded: Boolean = false,
     isFavorite: Boolean = false,
     onFavoriteClick: (Boolean) -> Unit = {},
-    onClick: () -> Unit = {}
 ) {
-    Card(
-        onClick = onClick,
+    var expanded by remember { mutableStateOf(false) }
+    Box(
         modifier = Modifier
             .fillMaxWidth()
+            .clickable(enabled = !program.description.isNullOrEmpty()) { expanded = !expanded }
             .then(modifier),
-        enabled = program.description != null
     ) {
         Column(
             Modifier
@@ -58,13 +58,12 @@ fun ProgramItem(
                     modifier = Modifier.width(startWidth),
                     color = MaterialTheme.colorScheme.tertiary,
                     textAlign = TextAlign.Center,
-                    fontWeight = FontWeight.Bold
+                    style = MaterialTheme.typography.titleMedium
                 )
                 Column(Modifier.padding(horizontal = 16.dp)) {
                     Text(
                         text = program.title,
-                        color = MaterialTheme.colorScheme.onPrimaryContainer,
-                        fontWeight = FontWeight.Bold
+                        style = MaterialTheme.typography.titleMedium
                     )
                     if (!program.location?.name.isNullOrEmpty()) {
                         Row(
@@ -72,15 +71,14 @@ fun ProgramItem(
                                 .alpha(0.7f)
                                 .height(IntrinsicSize.Min)
                         ) {
-                            Image(
+                            Icon(
                                 painter = LichtstadTheme.iconSet.location(),
                                 contentDescription = stringResource(R.string.program_item_location),
                                 modifier = Modifier.noIntrinsicHeight(),
-                                colorFilter = ColorFilter.tint(MaterialTheme.colorScheme.onPrimaryContainer)
                             )
                             Text(
                                 text = program.location!!.name,
-                                color = MaterialTheme.colorScheme.onPrimaryContainer,
+                                style = MaterialTheme.typography.labelMedium
                             )
                         }
 
@@ -110,6 +108,7 @@ fun ProgramItem(
                                 R.string.program_item_image_description_pattern,
                                 program.title
                             ),
+                            contentScale = ContentScale.Crop,
                             modifier = Modifier
                                 .width(startWidth)
                                 .aspectRatio(1f)
@@ -121,7 +120,7 @@ fun ProgramItem(
                         Text(
                             text = program.description,
                             modifier = Modifier.padding(horizontal = 16.dp),
-                            color = MaterialTheme.colorScheme.onPrimaryContainer
+                            style = MaterialTheme.typography.bodyMedium
                         )
                     }
                 }
@@ -130,26 +129,24 @@ fun ProgramItem(
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
-@Preview
+@Preview(showBackground = true)
 @Composable
 private fun PreviewProgramItem() {
     LichtstadTheme(programColorScheme()) {
         var isFavorite by remember { mutableStateOf(false) }
-        var expanded by remember { mutableStateOf(false) }
         ProgramItem(
-            program = Program(
-                title = "Officiële opening",
-                key = "abcdlfa",
-                description = "Officiële opening van Gramsbergen Lichtstad 2022",
-                location = Location("Vijver"),
-                time = LocalDateTime(2022, 8, 26, 20, 0),
-                imageUrl = "https://lichtstad-prd.s3.eu-west-1.amazonaws.com/program/2022/6481c559/1662976806126.jpg",
-            ),
-            expanded = expanded,
+            program = DemoProgram,
             isFavorite = isFavorite,
             onFavoriteClick = { isFavorite = !isFavorite },
-            onClick = { expanded = !expanded }
         )
     }
 }
+
+val DemoProgram = Program(
+    title = "Officiële opening",
+    key = "abcdlfa",
+    description = "Officiële opening van Gramsbergen Lichtstad 2022",
+    location = Location("Vijver"),
+    time = LocalDateTime(2022, 8, 26, 20, 0),
+    imageUrl = "https://lichtstad-prd.s3.eu-west-1.amazonaws.com/program/2022/6481c559/1662976806126.jpg",
+)

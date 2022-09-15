@@ -4,6 +4,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import com.move4mobile.lichtstad.R
+import com.move4mobile.lichtstad.ui.program.ProgramContent
 import com.move4mobile.lichtstad.ui.theme.*
 
 const val ROUTE_PROGRAM = "program"
@@ -19,7 +20,7 @@ val NAVIGATION_ITEMS = listOf(
         title = { stringResource(R.string.menu_program) },
         icon = { LichtstadTheme.iconSet.program() },
         theme = Theme.Program,
-        content = {  }
+        content = { ProgramContent() }
     ),
     NavigationItem(
         route = ROUTE_RESULTS,

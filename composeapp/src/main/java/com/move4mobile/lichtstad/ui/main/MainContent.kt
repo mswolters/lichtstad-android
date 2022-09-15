@@ -26,7 +26,7 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import com.move4mobile.lichtstad.ui.component.FlexibleNavigationBar
 import com.move4mobile.lichtstad.ui.theme.LichtstadTheme
 
-@ExperimentalMaterial3Api
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainContent(
     modifier: Modifier = Modifier,

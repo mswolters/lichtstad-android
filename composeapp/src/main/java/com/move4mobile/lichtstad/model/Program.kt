@@ -10,9 +10,9 @@ import kotlinx.parcelize.TypeParceler
 @TypeParceler<LocalDateTime, LocalDateTimeParceler>
 data class Program(
     val key: String,
+    val title: String,
+    val time: LocalDateTime,
     val description: String?,
     val location: Location?,
-    val time: LocalDateTime,
-    val title: String,
     val imageUrl: String?
 ): Parcelable
