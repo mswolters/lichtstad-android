@@ -1,8 +1,11 @@
 package com.move4mobile.lichtstad.ui.main
 
-import android.content.res.Configuration.ORIENTATION_PORTRAIT
+import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.navigationBarsPadding
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
@@ -132,29 +135,32 @@ private fun BottomBar(
 private fun TintSystemBars() {
     val statusBarColor = MaterialTheme.colorScheme.primary
     val darkStatusIcons = remember { statusBarColor.luminance() > 0.5 }
-    val navigationBarColor = NavigationBarDefaults.containerColor
+    val navigationBarColor = MaterialTheme.colorScheme.surfaceColorAtElevation(NavigationBarDefaults.Elevation)
     val darkNavigationIcons = remember { navigationBarColor.luminance() > 0.5 }
     val systemUiController = rememberSystemUiController()
-    // In portrait, we let the bottom nav handle the status bar color
+
+    // In portrait, we let the bottom nav handle the navigation bar color
     // In landscape, we need a shim or the buttons become invisible
-    val navbarShimColor = if (LocalConfiguration.current.orientation == ORIENTATION_PORTRAIT) {
-        // Can't do true transparent or android 29+ adds a shim. This is the smallest value that will actually make the bar transparent
-        Color(0f, 0f, 0f, 1f / 255f)
-    } else if (darkNavigationIcons) {
-        // 0.9 is the same alpha as android gives us. No clue if there's anything declared for this, so meh
-        Color.White.copy(alpha = 0.9f)
-    } else {
-        // Same as above, but 0.5. I can't be asked to find out where this is coming from, so here you go
-        Color.Black.copy(alpha = 0.5f)
-    }
+    val shouldApplyLandscapeScrim = LocalConfiguration.current.orientation == ORIENTATION_LANDSCAPE
+    val navbarShimColor = if (shouldApplyLandscapeScrim)
+        if (darkNavigationIcons) {
+            navigationBarColor.copy(alpha = 0.5f)
+        } else {
+            Color.Black.copy(alpha = 0.3f)
+        }
+    else Color.Transparent
+    val transformForLightContent = { _: Color -> Color.Black.copy(alpha = 0.3f) }
     LaunchedEffect(darkStatusIcons, darkNavigationIcons, navbarShimColor) {
         systemUiController.setStatusBarColor(
             color = Color.Transparent,
-            darkIcons = darkStatusIcons
+            darkIcons = darkStatusIcons,
+            transformColorForLightContent = transformForLightContent
         )
         systemUiController.setNavigationBarColor(
             color = navbarShimColor,
-            darkIcons = darkNavigationIcons
+            darkIcons = darkNavigationIcons,
+            navigationBarContrastEnforced = false,
+            transformColorForLightContent = transformForLightContent
         )
     }
 }
