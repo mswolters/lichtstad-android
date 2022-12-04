@@ -13,27 +13,27 @@ import com.move4mobile.lichtstad.ui.theme.programColorScheme
 @OptIn(ExperimentalPagerApi::class)
 @Composable
 fun ProgramContent() {
-    HorizontalPager(
-        count = 5,
-        modifier = Modifier.fillMaxHeight(),
-        verticalAlignment = Alignment.Top
-    ) {
-        currentPage
-        ProgramList(
-            programs = List(5) {
-                DemoProgram.copy(
-                    key = it.toString(),
-                    description = if (it == 3) null else DemoProgram.description
-                )
-            },
-        )
+    LichtstadTheme(programColorScheme()) {
+        HorizontalPager(
+            count = 5,
+            modifier = Modifier.fillMaxHeight(),
+            verticalAlignment = Alignment.Top
+        ) {
+            currentPage
+            ProgramList(
+                programs = List(5) {
+                    DemoProgram.copy(
+                        key = it.toString(),
+                        description = if (it == 3) null else DemoProgram.description
+                    )
+                },
+            )
+        }
     }
 }
 
 @Composable
 @Preview(showBackground = true)
 private fun PreviewProgramContent() {
-    LichtstadTheme(programColorScheme()) {
         ProgramContent()
-    }
 }
