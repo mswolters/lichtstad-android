@@ -4,8 +4,8 @@ plugins {
     id("kotlin-parcelize")
 }
 
-val composeVersion = "1.2.1"
-val accompanistVersion  = "0.26.3-beta"
+val composeVersion = "1.3.1"
+val accompanistVersion  = "0.28.0"
 
 android {
     namespace = "com.move4mobile.lichtstad"
@@ -36,8 +36,7 @@ android {
         compose = true
     }
     composeOptions {
-        //kotlinCompilerExtensionVersion = composeVersion
-        kotlinCompilerExtensionVersion = "1.3.1"
+        kotlinCompilerExtensionVersion = "1.3.2"
     }
 
     flavorDimensions += "whitelabel"
@@ -60,21 +59,21 @@ dependencies {
     //HUGE AND LARGE, make sure minify strips unused icons!
     implementation("androidx.compose.material:material-icons-extended:$composeVersion")
 
-    implementation("androidx.compose.material3:material3:1.0.0-beta02")
-    implementation("androidx.compose.material3:material3-window-size-class:1.0.0-beta02")
+    implementation("androidx.compose.material3:material3:1.0.1")
+    implementation("androidx.compose.material3:material3-window-size-class:1.0.1")
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
     implementation("com.google.accompanist:accompanist-pager:$accompanistVersion")
 
-    implementation("androidx.activity:activity-compose:1.5.1")
+    implementation("androidx.activity:activity-compose:1.6.1")
 
-    implementation("androidx.navigation:navigation-compose:2.5.2")
+    implementation("androidx.navigation:navigation-compose:2.5.3")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.5.1")
 
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
 
-    implementation("io.coil-kt:coil-compose:2.2.1")
+    implementation("io.coil-kt:coil-compose:2.2.2")
 
     debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$composeVersion")
