@@ -64,6 +64,7 @@ dependencies {
     implementation("androidx.compose.material3:material3-window-size-class:1.0.0-beta02")
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
+    implementation("com.google.accompanist:accompanist-pager:$accompanistVersion")
 
     implementation("androidx.activity:activity-compose:1.5.1")
 
