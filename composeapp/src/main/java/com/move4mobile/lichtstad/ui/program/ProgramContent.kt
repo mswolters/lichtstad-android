@@ -18,10 +18,11 @@ fun ProgramContent() {
             count = 5,
             modifier = Modifier.fillMaxHeight(),
             verticalAlignment = Alignment.Top
-        ) {
+        ) { page ->
             currentPage
             ProgramList(
-                programs = List(5) {
+                modifier = Modifier.fillMaxHeight(),
+                programs = List((page + 1) * 4) {
                     DemoProgram.copy(
                         key = it.toString(),
                         description = if (it == 3) null else DemoProgram.description

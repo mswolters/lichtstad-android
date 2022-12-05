@@ -13,6 +13,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -45,9 +46,13 @@ fun MainContent(
     ) {
         TintSystemBars()
 
+        // Pinned keeps the title always visible, switch to enterAlways to make it hide,
+        // once the bug that keeps the title centered while hiding is fixed.
+        val scrollBehavior = TopAppBarDefaults.pinnedScrollBehavior()
+        // TODO: Somehow make TopAppBar appear when switching content
         Scaffold(
-            modifier = modifier,
-            topBar = { TopBar() },
+            modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+            topBar = { TopBar(scrollBehavior = scrollBehavior) },
             bottomBar = {
                 BottomBar(
                     navigationItems = navigationItems,
@@ -71,7 +76,7 @@ fun MainContent(
 
 @ExperimentalMaterial3Api
 @Composable
-private fun TopBar(navigationViewModel: NavigationViewModel = viewModel()) {
+private fun TopBar(navigationViewModel: NavigationViewModel = viewModel(), scrollBehavior: TopAppBarScrollBehavior) {
     TopAppBar(
         title = { Text(navigationViewModel.activeNavigationItem.title()) },
         navigationIcon = {
@@ -88,6 +93,7 @@ private fun TopBar(navigationViewModel: NavigationViewModel = viewModel()) {
             titleContentColor = MaterialTheme.colorScheme.onPrimary,
             navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
         ),
+        scrollBehavior = scrollBehavior,
     )
 }
 
