@@ -1,11 +1,12 @@
-package com.move4mobile.lichtstad.ui.main
+package nl.drbreakalot.lichtstad.ui.main
 
 import androidx.compose.runtime.*
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
-import com.move4mobile.lichtstad.R
-import com.move4mobile.lichtstad.ui.program.ProgramContent
-import com.move4mobile.lichtstad.ui.theme.*
+import nl.drbreakalot.lichtstad.R
+import nl.drbreakalot.lichtstad.ui.program.ProgramContent
+import nl.drbreakalot.lichtstad.ui.theme.LichtstadTheme
+import nl.drbreakalot.lichtstad.ui.theme.Theme
 
 const val ROUTE_PROGRAM = "program"
 const val ROUTE_RESULTS = "results"

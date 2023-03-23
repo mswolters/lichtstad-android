@@ -10,7 +10,7 @@ val composeVersion = "1.4.0"
 val accompanistVersion  = "0.30.0"
 
 android {
-    namespace = "com.move4mobile.lichtstad"
+    namespace = "nl.drbreakalot.lichtstad"
     compileSdk = 33
     defaultConfig {
         applicationId = "nl.gramsbergen.oranjevereniging.lichtstad"

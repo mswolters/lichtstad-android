@@ -1,36 +1,30 @@
-package com.move4mobile.lichtstad.ui.program
+package nl.drbreakalot.lichtstad.ui.program
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
-import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.stringResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
-import com.move4mobile.lichtstad.R
-import com.move4mobile.lichtstad.model.Location
-import com.move4mobile.lichtstad.model.Program
-import com.move4mobile.lichtstad.ui.component.CustomizableCheckbox
-import com.move4mobile.lichtstad.ui.formatHoursMinutes
-import com.move4mobile.lichtstad.ui.noIntrinsicHeight
-import com.move4mobile.lichtstad.ui.theme.IconSet
-import com.move4mobile.lichtstad.ui.theme.LichtstadTheme
-import com.move4mobile.lichtstad.ui.theme.programColorScheme
+import nl.drbreakalot.lichtstad.R
+import nl.drbreakalot.lichtstad.model.Location
+import nl.drbreakalot.lichtstad.model.Program
+import nl.drbreakalot.lichtstad.ui.component.CustomizableCheckbox
+import nl.drbreakalot.lichtstad.ui.formatHoursMinutes
+import nl.drbreakalot.lichtstad.ui.noIntrinsicHeight
+import nl.drbreakalot.lichtstad.ui.theme.LichtstadTheme
+import nl.drbreakalot.lichtstad.ui.theme.programColorScheme
 import kotlinx.datetime.LocalDateTime
-import kotlin.math.exp
 
 @Composable
 fun ProgramItem(

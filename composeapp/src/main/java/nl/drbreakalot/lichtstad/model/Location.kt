@@ -1,4 +1,4 @@
-package com.move4mobile.lichtstad.model
+package nl.drbreakalot.lichtstad.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

@@ -1,4 +1,4 @@
-package com.move4mobile.lichtstad.ui.program
+package nl.drbreakalot.lichtstad.ui.program
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.fillMaxHeight
@@ -7,8 +7,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import com.move4mobile.lichtstad.ui.theme.LichtstadTheme
-import com.move4mobile.lichtstad.ui.theme.programColorScheme
+import nl.drbreakalot.lichtstad.ui.theme.LichtstadTheme
+import nl.drbreakalot.lichtstad.ui.theme.programColorScheme
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable

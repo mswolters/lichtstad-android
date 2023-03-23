@@ -1,9 +1,8 @@
-package com.move4mobile.lichtstad.parcelable
+package nl.drbreakalot.lichtstad.parcelable
 
 import android.os.Parcel
-import com.move4mobile.lichtstad.parcelable.LocalDateParceler.write
-import com.move4mobile.lichtstad.parcelable.LocalDateTimeParceler.write
-import com.move4mobile.lichtstad.parcelable.LocalTimeParceler.write
+import nl.drbreakalot.lichtstad.parcelable.LocalDateParceler.write
+import nl.drbreakalot.lichtstad.parcelable.LocalTimeParceler.write
 import kotlinx.datetime.LocalDate
 import kotlinx.datetime.LocalDateTime
 import kotlinx.datetime.LocalTime

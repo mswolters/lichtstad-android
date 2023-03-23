@@ -1,10 +1,10 @@
-package com.move4mobile.lichtstad.ui.theme
+package nl.drbreakalot.lichtstad.ui.theme
 
 import androidx.compose.material3.Typography
 import androidx.compose.ui.text.font.Font
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
-import com.move4mobile.lichtstad.R
+import nl.drbreakalot.lichtstad.R
 
 val enzoOTFontFamily = FontFamily(
     Font(R.font.enzoot_bold, FontWeight.Bold),

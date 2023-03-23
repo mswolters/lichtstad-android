@@ -25,7 +25,7 @@
 
 #Firebase database
 -keepattributes Signature
--keepclassmembers public class com.move4mobile.lichtstad.model.** {
+-keepclassmembers public class nl.drbreakalot.lichtstad.model.** {
     *;
 }
 

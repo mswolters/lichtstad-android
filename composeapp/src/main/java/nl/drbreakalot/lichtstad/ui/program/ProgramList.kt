@@ -1,4 +1,4 @@
-package com.move4mobile.lichtstad.ui.program
+package nl.drbreakalot.lichtstad.ui.program
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -8,7 +8,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.move4mobile.lichtstad.model.Program
+import nl.drbreakalot.lichtstad.model.Program
 
 @Composable
 fun ProgramList(programs: List<Program>, modifier: Modifier = Modifier) {

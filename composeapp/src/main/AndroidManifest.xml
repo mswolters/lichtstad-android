@@ -16,7 +16,7 @@
         android:theme="@style/Theme.SpecialDiary"
         tools:ignore="GoogleAppIndexingWarning">
         <activity
-            android:name=".MainActivity"
+            android:name="nl.drbreakalot.lichtstad.MainActivity"
             android:exported="true"
             android:launchMode="singleTop">
             <intent-filter>

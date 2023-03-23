@@ -1,4 +1,4 @@
-package com.move4mobile.lichtstad.ui.theme
+package nl.drbreakalot.lichtstad.ui.theme
 
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.*

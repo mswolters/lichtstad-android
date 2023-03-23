@@ -1,17 +1,14 @@
-package com.move4mobile.lichtstad.ui.theme
+package nl.drbreakalot.lichtstad.ui.theme
 
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material3.ColorScheme
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.surfaceColorAtElevation
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.Stable
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.unit.Dp
 import blend.Blend
-import com.move4mobile.lichtstad.R
+import nl.drbreakalot.lichtstad.R
 import scheme.Scheme
 
 @Composable

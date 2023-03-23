@@ -1,7 +1,7 @@
-package com.move4mobile.lichtstad.model
+package nl.drbreakalot.lichtstad.model
 
 import android.os.Parcelable
-import com.move4mobile.lichtstad.parcelable.LocalDateTimeParceler
+import nl.drbreakalot.lichtstad.parcelable.LocalDateTimeParceler
 import kotlinx.datetime.LocalDateTime
 import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.TypeParceler

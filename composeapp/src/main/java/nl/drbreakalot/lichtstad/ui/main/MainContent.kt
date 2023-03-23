@@ -1,4 +1,4 @@
-package com.move4mobile.lichtstad.ui.main
+package nl.drbreakalot.lichtstad.ui.main
 
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
 import androidx.compose.foundation.background
@@ -24,8 +24,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
-import com.move4mobile.lichtstad.ui.component.FlexibleNavigationBar
-import com.move4mobile.lichtstad.ui.theme.LichtstadTheme
+import nl.drbreakalot.lichtstad.ui.component.FlexibleNavigationBar
+import nl.drbreakalot.lichtstad.ui.theme.LichtstadTheme
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable

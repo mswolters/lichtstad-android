@@ -1,4 +1,4 @@
-package com.move4mobile.lichtstad.ui.theme
+package nl.drbreakalot.lichtstad.ui.theme
 
 import android.content.res.Configuration
 import androidx.compose.foundation.background
@@ -17,8 +17,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.lifecycle.ViewModel
-import com.move4mobile.lichtstad.ui.main.NavigationViewModel
+import nl.drbreakalot.lichtstad.ui.main.NavigationViewModel
 
 @Preview(name = "Light mode", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_NO)
 @Preview(name = "Dark mode", showBackground = true, uiMode = Configuration.UI_MODE_NIGHT_YES)

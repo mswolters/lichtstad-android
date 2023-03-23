@@ -1,4 +1,4 @@
-package com.move4mobile.lichtstad.ui
+package nl.drbreakalot.lichtstad.ui
 
 import androidx.compose.runtime.Composable
 import kotlinx.datetime.LocalTime

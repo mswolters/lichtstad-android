@@ -1,4 +1,4 @@
-package com.move4mobile.lichtstad.ui.component
+package nl.drbreakalot.lichtstad.ui.component
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.selection.selectableGroup
