@@ -2,8 +2,11 @@ plugins {
     id("java-library")
 }
 
-//NOTE, this entire module was yoinked from https://github.com/material-foundation/material-color-utilities
-//it has not been published on maven yet. Remove when it is.
+// NOTE: The original intention was to replace this with a maven dependency
+// when that would become available. However, it was moved into the material-components-android library
+// and the methods used to generate a full material color scheme from 1 color are marked internal.
+// So let's just keep this dependency so we don't have to mess around before compiling.
+// Check https://github.com/material-foundation/material-color-utilities
 
 java {
     sourceCompatibility = JavaVersion.VERSION_1_7
