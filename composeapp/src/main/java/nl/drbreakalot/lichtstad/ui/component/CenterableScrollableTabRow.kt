@@ -22,7 +22,6 @@ import androidx.compose.animation.core.FastOutSlowInEasing
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ScrollState
-import androidx.compose.foundation.background
 import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.rememberScrollState
@@ -46,12 +45,6 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.launch
 import nl.drbreakalot.lichtstad.ui.component.CenterableTabRowDefaults.centerableTabIndicatorOffset
 import kotlin.math.max
-
-/**
- * Basically a version of the Material3 ScrollableTabRow which can also be used when there's
- * not enough content to force scrolling. The Material3 version does not draw the divider long enough
- * and always puts the tabs at the start. This version allows for centering the tabs too.
- */
 
 /**
  * Material Design scrollable tabs.
