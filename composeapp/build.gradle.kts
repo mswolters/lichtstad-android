@@ -34,6 +34,10 @@ android {
     kotlinOptions {
         jvmTarget = "1.8"
     }
+    compileOptions {
+        // We need java's LocalDate while kotlinx-datetime doesn't have formatters
+        isCoreLibraryDesugaringEnabled = true
+    }
     buildFeatures {
         compose = true
     }
@@ -51,6 +55,8 @@ android {
 }
 
 dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
+
     // NOTE: The original intention was to replace this with a maven dependency
     // when that would become available. However, it was moved into the material-components-android library
     // and the methods used to generate a full material color scheme from 1 color are marked internal.
@@ -74,10 +80,14 @@ dependencies {
     implementation("androidx.navigation:navigation-compose:2.5.3")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-compose:2.6.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.1")
 
     implementation("org.jetbrains.kotlinx:kotlinx-datetime:0.4.0")
 
     implementation("io.coil-kt:coil-compose:2.2.2")
+
+    implementation("io.insert-koin:koin-androidx-compose:3.4.3")
+    implementation("io.insert-koin:koin-androidx-compose-navigation:3.4.3")
 
     debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$composeVersion")

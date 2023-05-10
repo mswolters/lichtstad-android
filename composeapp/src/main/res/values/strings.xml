@@ -10,4 +10,8 @@
     <string name="program_item_location">Locatie</string>
     <string name="program_item_image_description_pattern">Sfeerimpressie %s</string>
 
+    <string name="format_locale">nl-NL</string>
+    <string name="format_time">HH:mm</string>
+    <string name="format_tab_date">EEEE\'\n\'dd MMM</string>
+
 </resources>

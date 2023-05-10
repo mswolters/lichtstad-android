@@ -26,12 +26,13 @@ import androidx.navigation.compose.rememberNavController
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 import nl.drbreakalot.lichtstad.ui.component.FlexibleNavigationBar
 import nl.drbreakalot.lichtstad.ui.theme.LichtstadTheme
+import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun MainContent(
     modifier: Modifier = Modifier,
-    navigationViewModel: NavigationViewModel = viewModel(),
+    navigationViewModel: NavigationViewModel = koinViewModel(),
     navigationItems: List<NavigationItem> = NAVIGATION_ITEMS
 ) {
     val navController = rememberNavController()
@@ -76,7 +77,7 @@ fun MainContent(
 
 @ExperimentalMaterial3Api
 @Composable
-private fun TopBar(navigationViewModel: NavigationViewModel = viewModel(), scrollBehavior: TopAppBarScrollBehavior) {
+private fun TopBar(navigationViewModel: NavigationViewModel = koinViewModel(), scrollBehavior: TopAppBarScrollBehavior) {
     TopAppBar(
         title = { Text(navigationViewModel.activeNavigationItem.title()) },
         navigationIcon = {
@@ -101,7 +102,7 @@ private fun TopBar(navigationViewModel: NavigationViewModel = viewModel(), scrol
 private fun BottomBar(
     navigationItems: List<NavigationItem>,
     navController: NavController,
-    navigationViewModel: NavigationViewModel = viewModel(),
+    navigationViewModel: NavigationViewModel = koinViewModel(),
 ) {
     Box(
         modifier = Modifier

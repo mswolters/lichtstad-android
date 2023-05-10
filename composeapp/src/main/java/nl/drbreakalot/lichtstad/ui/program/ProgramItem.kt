@@ -17,14 +17,13 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.rememberAsyncImagePainter
 import nl.drbreakalot.lichtstad.R
-import nl.drbreakalot.lichtstad.model.Location
-import nl.drbreakalot.lichtstad.model.Program
+import nl.drbreakalot.lichtstad.data.model.Program
 import nl.drbreakalot.lichtstad.ui.component.CustomizableCheckbox
 import nl.drbreakalot.lichtstad.ui.formatHoursMinutes
 import nl.drbreakalot.lichtstad.ui.noIntrinsicHeight
 import nl.drbreakalot.lichtstad.ui.theme.LichtstadTheme
 import nl.drbreakalot.lichtstad.ui.theme.programColorScheme
-import kotlinx.datetime.LocalDateTime
+import nl.drbreakalot.lichtstad.data.model.DemoProgram
 
 @Composable
 fun ProgramItem(
@@ -48,7 +47,7 @@ fun ProgramItem(
             val startWidth = with(LocalDensity.current) { 48.sp.toDp() }
             Row(Modifier.fillMaxWidth()) {
                 Text(
-                    text = formatHoursMinutes(time = program.time.time),
+                    text = program.time.time.formatHoursMinutes(),
                     modifier = Modifier.width(startWidth),
                     color = MaterialTheme.colorScheme.tertiary,
                     textAlign = TextAlign.Center,
@@ -135,12 +134,3 @@ private fun PreviewProgramItem() {
         )
     }
 }
-
-val DemoProgram = Program(
-    title = "Officiële opening",
-    key = "abcdlfa",
-    description = "Officiële opening van Gramsbergen Lichtstad 2022",
-    location = Location("Vijver"),
-    time = LocalDateTime(2022, 8, 26, 20, 0),
-    imageUrl = "https://lichtstad-prd.s3.eu-west-1.amazonaws.com/program/2022/6481c559/1662976806126.jpg",
-)

@@ -1,4 +1,4 @@
-package nl.drbreakalot.lichtstad.model
+package nl.drbreakalot.lichtstad.data.model
 
 import android.os.Parcelable
 import kotlinx.parcelize.Parcelize

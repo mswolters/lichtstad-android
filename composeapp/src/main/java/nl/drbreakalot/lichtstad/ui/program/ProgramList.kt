@@ -8,7 +8,7 @@ import androidx.compose.material3.Divider
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import nl.drbreakalot.lichtstad.model.Program
+import nl.drbreakalot.lichtstad.data.model.Program
 
 @Composable
 fun ProgramList(programs: List<Program>, modifier: Modifier = Modifier) {
