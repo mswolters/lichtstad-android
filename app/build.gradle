@@ -20,7 +20,7 @@ android {
         targetSdk 33
         versionCode buildNumber
         versionName "2022.1"
-        resConfigs 'nl'
+        resourceConfigurations += ['nl']
     }
 
     signingConfigs {

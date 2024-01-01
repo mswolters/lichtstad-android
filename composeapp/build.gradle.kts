@@ -11,7 +11,7 @@ val accompanistVersion  = "0.30.0"
 
 android {
     namespace = "nl.drbreakalot.lichtstad"
-    compileSdk = 33
+    compileSdk = 34
     defaultConfig {
         applicationId = "nl.gramsbergen.oranjevereniging.lichtstad"
         minSdk = 21
@@ -55,7 +55,7 @@ android {
 }
 
 dependencies {
-    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.3")
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.0.4")
 
     // NOTE: The original intention was to replace this with a maven dependency
     // when that would become available. However, it was moved into the material-components-android library
@@ -64,7 +64,7 @@ dependencies {
     // Check https://github.com/material-foundation/material-color-utilities
     implementation(project(":composeapp:material-color-utilities"))
 
-    implementation("androidx.core:core-ktx:1.9.0")
+    implementation("androidx.core:core-ktx:1.12.0")
     implementation("androidx.compose.ui:ui:$composeVersion")
     implementation("androidx.compose.ui:ui-tooling-preview:$composeVersion")
     //HUGE AND LARGE, make sure minify strips unused icons!
