@@ -6,8 +6,8 @@ plugins {
     id("kotlin-parcelize")
 }
 
-val composeVersion = "1.4.0"
-val accompanistVersion  = "0.30.0"
+val composeVersion = "1.5.4"
+val accompanistVersion  = "0.32.0"
 
 android {
     namespace = "nl.drbreakalot.lichtstad"
@@ -75,7 +75,7 @@ dependencies {
 
     implementation("com.google.accompanist:accompanist-systemuicontroller:$accompanistVersion")
 
-    implementation("androidx.activity:activity-compose:1.7.0")
+    implementation("androidx.activity:activity-compose:1.8.2")
 
     implementation("androidx.navigation:navigation-compose:2.5.3")
 

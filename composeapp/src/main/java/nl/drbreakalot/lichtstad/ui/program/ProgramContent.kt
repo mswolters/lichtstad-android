@@ -28,9 +28,9 @@ import org.koin.androidx.compose.navigation.koinNavViewModel
 fun ProgramContent(viewModel: ProgramViewModel = koinNavViewModel()) {
     LichtstadTheme(programColorScheme()) {
         Column {
-            val pagerState = rememberPagerState()
-            val scrollScope = rememberCoroutineScope()
             val days by viewModel.days.collectAsStateWithLifecycle(emptyList())
+            val pagerState = rememberPagerState { days.size }
+            val scrollScope = rememberCoroutineScope()
             if (days.isEmpty()) return@Column
             CenterableScrollableTabRow(
                 selectedTabIndex = pagerState.currentPage,
@@ -44,7 +44,6 @@ fun ProgramContent(viewModel: ProgramViewModel = koinNavViewModel()) {
                 }
             }
             HorizontalPager(
-                pageCount = days.size,
                 modifier = Modifier.fillMaxHeight(),
                 verticalAlignment = Alignment.Top,
                 state = pagerState
