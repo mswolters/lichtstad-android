@@ -4,6 +4,7 @@ plugins {
     id("com.android.application")
     kotlin("android")
     id("kotlin-parcelize")
+    id("com.google.gms.google-services")
 }
 
 val composeVersion = "1.5.4"
@@ -49,7 +50,7 @@ android {
     productFlavors {
         create("lichtstad") {
             dimension = "whitelabel"
-            applicationId = "nl.gramsbergen.oranjevereniging.lichtstad.compose"
+            applicationId = "nl.gramsbergen.oranjevereniging.lichtstad"
         }
     }
 }
@@ -88,6 +89,9 @@ dependencies {
 
     implementation("io.insert-koin:koin-androidx-compose:3.5.3")
     implementation("io.insert-koin:koin-androidx-compose-navigation:3.5.3")
+
+    implementation(platform("com.google.firebase:firebase-bom:32.7.0"))
+    implementation("com.google.firebase:firebase-database")
 
     debugImplementation("androidx.compose.ui:ui-tooling:$composeVersion")
     debugImplementation("androidx.compose.ui:ui-test-manifest:$composeVersion")

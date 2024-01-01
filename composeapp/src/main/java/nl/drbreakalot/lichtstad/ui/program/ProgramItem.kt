@@ -47,7 +47,7 @@ fun ProgramItem(
             val startWidth = with(LocalDensity.current) { 48.sp.toDp() }
             Row(Modifier.fillMaxWidth()) {
                 Text(
-                    text = program.time.time.formatHoursMinutes(),
+                    text = program.timeAsDate.formatHoursMinutes(),
                     modifier = Modifier.width(startWidth),
                     color = MaterialTheme.colorScheme.tertiary,
                     textAlign = TextAlign.Center,
@@ -62,6 +62,7 @@ fun ProgramItem(
                         Row(
                             modifier = Modifier
                                 .alpha(0.7f)
+                                .padding(top = 2.dp)
                                 .height(IntrinsicSize.Min)
                         ) {
                             Icon(
