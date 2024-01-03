@@ -9,9 +9,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import nl.drbreakalot.lichtstad.data.model.Video
+import org.koin.androidx.compose.navigation.koinNavViewModel
 
 @Composable
-fun VideoList(videos: List<Video>, modifier: Modifier = Modifier) {
+fun VideoList(
+    videos: List<Video>,
+    modifier: Modifier = Modifier,
+    viewModel: VideoViewModel = koinNavViewModel()
+) {
     //TODO not fixed on tablets/wiiide phones
     LazyVerticalStaggeredGrid(
         modifier = modifier,
@@ -21,7 +26,7 @@ fun VideoList(videos: List<Video>, modifier: Modifier = Modifier) {
         horizontalArrangement = Arrangement.spacedBy(8.dp)
     ) {
         items(videos, key = { video -> video.id }) {
-            VideoItem(video = it)
+            VideoItem(video = it, onClick = { viewModel.onClicked(it) })
         }
     }
 }

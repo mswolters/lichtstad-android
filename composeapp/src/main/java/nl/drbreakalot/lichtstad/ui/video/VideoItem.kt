@@ -27,14 +27,14 @@ import org.koin.androidx.compose.navigation.koinNavViewModel
 fun VideoItem(
     video: Video,
     modifier: Modifier = Modifier,
-    viewModel: VideoViewModel = koinNavViewModel()
+    onClick: (() -> Unit)
 ) {
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
             .then(modifier)
     ) {
-        Column(modifier = Modifier.clickable { viewModel.onClicked(video) }) {
+        Column(modifier = Modifier.clickable { onClick() }) {
             Image(
                 modifier = Modifier
                     .fillMaxWidth()
@@ -64,6 +64,7 @@ private fun PreviewVideoItem() {
     LichtstadTheme(videoColorScheme()) {
         VideoItem(
             video = DemoVideo,
+            onClick = {}
         )
     }
 }
