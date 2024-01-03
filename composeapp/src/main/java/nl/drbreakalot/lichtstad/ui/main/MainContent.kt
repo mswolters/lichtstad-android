@@ -18,6 +18,7 @@ import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -37,8 +38,7 @@ fun MainContent(
     val navController = rememberNavController()
     LaunchedEffect(navController) {
         navController.addOnDestinationChangedListener { controller, destination, bundle ->
-            navigationViewModel.activeNavigationItem =
-                navigationItems.single { it.route == destination.route }
+            navigationViewModel.activeNavigationItem = navigationItems.single { item -> destination.hierarchy.any { it.route == item.route } }
         }
     }
     LichtstadTheme(
