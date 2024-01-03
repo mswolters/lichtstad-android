@@ -7,6 +7,7 @@ import nl.drbreakalot.lichtstad.R
 import nl.drbreakalot.lichtstad.ui.program.ProgramContent
 import nl.drbreakalot.lichtstad.ui.theme.LichtstadTheme
 import nl.drbreakalot.lichtstad.ui.theme.Theme
+import nl.drbreakalot.lichtstad.ui.video.VideoContent
 
 const val ROUTE_PROGRAM = "program"
 const val ROUTE_RESULTS = "results"
@@ -42,7 +43,7 @@ val NAVIGATION_ITEMS = listOf(
         title = { stringResource(R.string.menu_videos) },
         icon = { LichtstadTheme.iconSet.video() },
         theme = Theme.Video,
-        content = {  }
+        content = { VideoContent() }
     ),
     NavigationItem(
         route = ROUTE_MAP,

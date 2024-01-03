@@ -27,7 +27,7 @@ val Typography = Typography(
     labelLarge = defaultTypography.labelLarge.copy(fontFamily = enzoOTFontFamily),
     labelMedium = defaultTypography.labelMedium.copy(fontFamily = enzoOTFontFamily),
     labelSmall = defaultTypography.labelSmall.copy(fontFamily = enzoOTFontFamily),
-    titleLarge = defaultTypography.titleLarge.copy(fontFamily = enzoOTFontFamily),
-    titleMedium = defaultTypography.titleMedium.copy(fontFamily = enzoOTFontFamily),
-    titleSmall = defaultTypography.titleSmall.copy(fontFamily = enzoOTFontFamily),
+    titleLarge = defaultTypography.titleLarge.copy(fontFamily = enzoOTFontFamily, fontWeight = FontWeight(700)),
+    titleMedium = defaultTypography.titleMedium.copy(fontFamily = enzoOTFontFamily, fontWeight = FontWeight(700)),
+    titleSmall = defaultTypography.titleSmall.copy(fontFamily = enzoOTFontFamily, fontWeight = FontWeight(700)),
 )

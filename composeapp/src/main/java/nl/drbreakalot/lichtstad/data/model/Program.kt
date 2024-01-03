@@ -20,7 +20,7 @@ data class Program(
     val timeAsDate: Date
         get() = Date(time)
 
-    // No-arg constructor is required for mapping
+    // No-arg constructor is required for automatic firebase mapping
     private constructor() : this("",
         "",
         0,
