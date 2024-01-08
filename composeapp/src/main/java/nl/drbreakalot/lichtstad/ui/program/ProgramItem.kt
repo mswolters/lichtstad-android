@@ -53,7 +53,7 @@ fun ProgramItem(
                     textAlign = TextAlign.Center,
                     style = MaterialTheme.typography.titleMedium
                 )
-                Column(Modifier.padding(horizontal = 16.dp)) {
+                Column(Modifier.weight(1f).padding(start = 16.dp, end = 8.dp)) {
                     Text(
                         text = program.title,
                         style = MaterialTheme.typography.titleMedium
@@ -78,7 +78,6 @@ fun ProgramItem(
 
                     }
                 }
-                Spacer(modifier = Modifier.weight(1f))
                 CustomizableCheckbox(
                     checked = isFavorite,
                     modifier = Modifier.size(24.dp),

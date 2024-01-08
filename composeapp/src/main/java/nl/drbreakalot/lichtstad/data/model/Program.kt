@@ -30,7 +30,7 @@ data class Program(
 }
 
 val DemoProgram = Program(
-    title = "Officiële opening",
+    title = "Prijsuitreiking achtkamp en versierde straten",
     key = "abcdlfa",
     description = "Officiële opening van Gramsbergen Lichtstad 2022",
     location = Location("Vijver"),
