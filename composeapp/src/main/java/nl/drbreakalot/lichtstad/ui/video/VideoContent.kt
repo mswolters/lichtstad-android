@@ -28,9 +28,9 @@ fun VideoContent(viewModel: VideoViewModel = koinNavViewModel()) {
     LichtstadTheme(videoColorScheme()) {
         Column {
             val years by viewModel.years.collectAsStateWithLifecycle(emptyList())
-            val pagerState = rememberPagerState { years.size }
-            val scrollScope = rememberCoroutineScope()
             if (years.isEmpty()) return@Column
+            val pagerState = rememberPagerState(initialPage = years.size - 1) { years.size }
+            val scrollScope = rememberCoroutineScope()
             CenterableScrollableTabRow(
                 selectedTabIndex = pagerState.currentPage,
                 modifier = Modifier.fillMaxWidth()
@@ -46,7 +46,8 @@ fun VideoContent(viewModel: VideoViewModel = koinNavViewModel()) {
             HorizontalPager(
                 modifier = Modifier.fillMaxHeight(),
                 verticalAlignment = Alignment.Top,
-                state = pagerState
+                state = pagerState,
+                beyondBoundsPageCount = 1,
             ) { page ->
                 VideoYear(year = years[page])
             }
