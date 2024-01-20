@@ -4,6 +4,7 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import nl.drbreakalot.lichtstad.R
+import nl.drbreakalot.lichtstad.ui.map.MapContent
 import nl.drbreakalot.lichtstad.ui.program.ProgramContent
 import nl.drbreakalot.lichtstad.ui.theme.LichtstadTheme
 import nl.drbreakalot.lichtstad.ui.theme.Theme
@@ -50,7 +51,7 @@ val NAVIGATION_ITEMS = listOf(
         title = { stringResource(R.string.menu_map) },
         icon = { LichtstadTheme.iconSet.map() },
         theme = Theme.Map,
-        content = {  }
+        content = { MapContent() }
     ),
 )
 
