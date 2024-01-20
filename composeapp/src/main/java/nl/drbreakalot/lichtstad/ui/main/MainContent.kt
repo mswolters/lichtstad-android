@@ -88,7 +88,7 @@ private fun TopBar(navigationViewModel: NavigationViewModel = koinViewModel(), s
                     .size(32.dp)
             )
         },
-        colors = TopAppBarDefaults.smallTopAppBarColors(
+        colors = TopAppBarDefaults.topAppBarColors(
             containerColor = MaterialTheme.colorScheme.primary,
             titleContentColor = MaterialTheme.colorScheme.onPrimary,
             navigationIconContentColor = MaterialTheme.colorScheme.onPrimary
@@ -171,7 +171,6 @@ private fun TintSystemBars() {
     }
 }
 
-@OptIn(ExperimentalMaterial3Api::class)
 @Preview(showBackground = true)
 @Composable
 fun DefaultPreview() {

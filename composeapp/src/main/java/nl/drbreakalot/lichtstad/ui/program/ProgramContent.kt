@@ -55,7 +55,8 @@ fun ProgramContent(viewModel: ProgramViewModel = koinNavViewModel()) {
             HorizontalPager(
                 modifier = Modifier.fillMaxHeight(),
                 verticalAlignment = Alignment.Top,
-                state = pagerState
+                state = pagerState,
+                beyondBoundsPageCount = 1,
             ) { page ->
                 ProgramDay(day = days[page])
             }
