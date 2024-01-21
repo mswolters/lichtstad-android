@@ -12,15 +12,14 @@ import kotlinx.coroutines.flow.callbackFlow
 import nl.drbreakalot.lichtstad.data.service.MapService
 
 class MapServiceImpl(private val database: FirebaseDatabase) : MapService {
-    override fun route(year: Int): Flow<String> {
+    override fun layers(year: Int): Flow<Map<String, String>> {
         val reference = database.getReference("map")
             .child(year.toString())
-            .child("route")
         return callbackFlow {
-            trySend("")
+            trySend(emptyMap())
             val listener = reference.addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    trySend(snapshot.getValue<String>().orEmpty())
+                    trySend(snapshot.getValue<Map<String, String>>().orEmpty())
                 }
 
                 override fun onCancelled(error: DatabaseError) {

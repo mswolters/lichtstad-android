@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="google_maps_key" translatable="false">AIzaSyDH0c99I3g5v5EKU50w7-J68ouF6jTU73s</string>
-    <string name="map_center_lat">52.6075</string>
-    <string name="map_center_lng">6.671</string>
-    <string name="map_zoom">14</string>
+
+    <item name="map_min_lat" type="dimen" format="float">52.5995</item>
+    <item name="map_min_lng" type="dimen" format="float">6.660952</item>
+    <item name="map_max_lat" type="dimen" format="float">52.6144</item>
+    <item name="map_max_lng" type="dimen" format="float">6.682</item>
+    <item name="map_default_zoom" type="dimen" format="float">14.5</item>
+    <item name="map_default_center_lat" type="dimen" format="float">52.6075</item>
+    <item name="map_default_center_lng" type="dimen" format="float">6.671</item>
+
+
 </resources>

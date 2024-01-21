@@ -4,6 +4,6 @@ import kotlinx.coroutines.flow.Flow
 
 interface MapService {
 
-    fun route(year: Int): Flow<String>
+    fun layers(year: Int): Flow<Map<String, String>>
 
 }
