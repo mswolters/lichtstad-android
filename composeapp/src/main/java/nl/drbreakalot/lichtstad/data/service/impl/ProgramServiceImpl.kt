@@ -34,15 +34,15 @@ class ProgramServiceImpl(private val database: FirebaseDatabase) : ProgramServic
     override fun programs(day: LocalDate): Flow<List<Program>> {
         val dayReference = database
             .getReference("program_v2")
-            .child("2023")
+            .child("${day.year}")
             .child("$day")
             .child("programs")
 
         return callbackFlow {
             val listener = dayReference.addValueEventListener(object: ValueEventListener {
                 override fun onDataChange(snapshot: DataSnapshot) {
-                    val snapshots = snapshot.getValue<Map<String, Program>>() ?: emptyMap()
-                    trySend(snapshots.values.toList())
+                    val snapshots = snapshot.children.map { it.getValue<Program>()!! }
+                    trySend(snapshots)
                 }
 
                 override fun onCancelled(error: DatabaseError) {
