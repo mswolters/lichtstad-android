@@ -4,13 +4,16 @@ import com.google.firebase.database.ktx.database
 import com.google.firebase.ktx.Firebase
 import nl.drbreakalot.lichtstad.data.service.MapService
 import nl.drbreakalot.lichtstad.data.service.ProgramService
+import nl.drbreakalot.lichtstad.data.service.ResultService
 import nl.drbreakalot.lichtstad.data.service.VideoService
 import nl.drbreakalot.lichtstad.data.service.impl.MapServiceImpl
 import nl.drbreakalot.lichtstad.data.service.impl.ProgramServiceImpl
+import nl.drbreakalot.lichtstad.data.service.impl.ResultServiceImpl
 import nl.drbreakalot.lichtstad.data.service.impl.VideoServiceImpl
 import nl.drbreakalot.lichtstad.ui.main.NavigationViewModel
 import nl.drbreakalot.lichtstad.ui.map.MapViewModel
 import nl.drbreakalot.lichtstad.ui.program.ProgramViewModel
+import nl.drbreakalot.lichtstad.ui.result.ResultViewModel
 import nl.drbreakalot.lichtstad.ui.video.VideoViewModel
 import org.koin.androidx.viewmodel.dsl.viewModelOf
 import org.koin.core.module.dsl.bind
@@ -22,7 +25,9 @@ val appModule = module {
     singleOf(::ProgramServiceImpl) { bind<ProgramService>() }
     singleOf(::VideoServiceImpl) { bind<VideoService>() }
     singleOf(::MapServiceImpl) { bind<MapService>() }
+    singleOf(::ResultServiceImpl) { bind<ResultService>() }
     viewModelOf(::ProgramViewModel)
+    viewModelOf(::ResultViewModel)
     viewModelOf(::VideoViewModel)
     viewModelOf(::MapViewModel)
     viewModelOf(::NavigationViewModel)
