@@ -3,10 +3,7 @@ package nl.drbreakalot.lichtstad.ui.map
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.remember
-import androidx.compose.ui.res.dimensionResource
-import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
-import com.google.android.gms.maps.GoogleMapOptions
 import com.google.android.gms.maps.model.CameraPosition
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.LatLngBounds
@@ -19,13 +16,13 @@ import com.google.maps.android.compose.rememberCameraPositionState
 import com.google.maps.android.data.kml.KmlLayer
 import nl.drbreakalot.lichtstad.R
 import nl.drbreakalot.lichtstad.res.floatResource
-import org.koin.androidx.compose.navigation.koinNavViewModel
+import org.koin.androidx.compose.koinViewModel
 import java.io.ByteArrayInputStream
 import java.nio.charset.StandardCharsets
 
 @OptIn(MapsComposeExperimentalApi::class)
 @Composable
-fun MapContent(viewModel: MapViewModel = koinNavViewModel()) {
+fun MapContent(viewModel: MapViewModel = koinViewModel()) {
     val mapBounds = LatLngBounds(
         LatLng(
             floatResource(R.dimen.map_min_lat).toDouble(),

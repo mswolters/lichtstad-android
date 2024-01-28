@@ -1,4 +1,4 @@
-package nl.drbreakalot.lichtstad.ui.video
+package nl.drbreakalot.lichtstad.ui.photo
 
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.layout.Column
@@ -13,20 +13,18 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import kotlinx.coroutines.launch
 import nl.drbreakalot.lichtstad.ui.component.CenterableScrollableTabRow
-import nl.drbreakalot.lichtstad.ui.program.ProgramContent
 import nl.drbreakalot.lichtstad.ui.theme.LichtstadTheme
-import nl.drbreakalot.lichtstad.ui.theme.videoColorScheme
+import nl.drbreakalot.lichtstad.ui.theme.photoColorScheme
 import org.koin.androidx.compose.koinViewModel
 import org.koin.androidx.compose.navigation.koinNavViewModel
 
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
-fun VideoContent(viewModel: VideoViewModel = koinViewModel()) {
-    LichtstadTheme(videoColorScheme()) {
+fun PhotoContent(viewModel: PhotoViewModel = koinViewModel()) {
+    LichtstadTheme(photoColorScheme()) {
         Column {
             val years by viewModel.years.collectAsStateWithLifecycle(emptyList())
             if (years.isEmpty()) return@Column
@@ -50,20 +48,16 @@ fun VideoContent(viewModel: VideoViewModel = koinViewModel()) {
                 state = pagerState,
                 beyondBoundsPageCount = 1,
             ) { page ->
-                VideoYear(year = years[page])
+                PhotoYear(year = years[page])
             }
         }
     }
 }
 
 @Composable
-private fun VideoYear(year: Int, viewModel: VideoViewModel = koinNavViewModel()) {
-    val videos by viewModel.videos(year).collectAsStateWithLifecycle(emptyList())
-    VideoList(modifier = Modifier.fillMaxHeight(), videos = videos, onVideoClick = { viewModel.onClicked(it) })
-}
-
-@Composable
-@Preview(showBackground = true)
-private fun PreviewProgramContent() {
-    ProgramContent()
+private fun PhotoYear(year: Int, viewModel: PhotoViewModel = koinNavViewModel()) {
+    val photos by viewModel.albums(year).collectAsStateWithLifecycle(emptyList())
+    AlbumList(albums = photos, modifier = Modifier.fillMaxHeight()) {
+        TODO()
+    }
 }

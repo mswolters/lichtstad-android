@@ -5,6 +5,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.lifecycle.ViewModel
 import nl.drbreakalot.lichtstad.R
 import nl.drbreakalot.lichtstad.ui.map.MapContent
+import nl.drbreakalot.lichtstad.ui.photo.PhotoContent
 import nl.drbreakalot.lichtstad.ui.program.ProgramContent
 import nl.drbreakalot.lichtstad.ui.result.ResultContent
 import nl.drbreakalot.lichtstad.ui.theme.LichtstadTheme
@@ -38,7 +39,7 @@ val NAVIGATION_ITEMS = listOf(
         title = { stringResource(R.string.menu_photos) },
         icon = { LichtstadTheme.iconSet.photo() },
         theme = Theme.Photo,
-        content = {  }
+        content = { PhotoContent() }
     ),
     NavigationItem(
         route = ROUTE_VIDEOS,
