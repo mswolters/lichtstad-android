@@ -55,9 +55,9 @@ fun PhotoContent(viewModel: PhotoViewModel = koinViewModel()) {
 }
 
 @Composable
-private fun PhotoYear(year: Int, viewModel: PhotoViewModel = koinNavViewModel()) {
+private fun PhotoYear(year: String, viewModel: PhotoViewModel = koinNavViewModel()) {
     val photos by viewModel.albums(year).collectAsStateWithLifecycle(emptyList())
     AlbumList(albums = photos, modifier = Modifier.fillMaxHeight()) {
-        TODO()
+        viewModel.onClicked(it)
     }
 }

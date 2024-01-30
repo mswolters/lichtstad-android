@@ -3,6 +3,7 @@ package nl.drbreakalot.lichtstad.data.model
 import com.google.firebase.database.PropertyName
 
 data class Album(
+    var year: String,
     var key: String,
     val title: String,
     @get:PropertyName("photo_count")
@@ -19,7 +20,7 @@ data class Album(
     val uploadTime: Long
 ) {
     // no-arg constructor is required for automated Firebase mapping
-    constructor() : this("", "", 0, "", Size(), 0)
+    constructor() : this("", "", "", 0, "", Size(), 0)
 }
 
 data class Size(val width: Int, val height: Int) {
@@ -30,6 +31,7 @@ data class Size(val width: Int, val height: Int) {
 }
 
 val DemoAlbum = Album(
+    year = "2023",
     key = "asdfasdf",
     title = "Demo album",
     photoCount = 10,

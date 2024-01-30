@@ -17,13 +17,16 @@ import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.navOptions
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import kotlinx.coroutines.flow.onEach
 import nl.drbreakalot.lichtstad.ui.component.FlexibleNavigationBar
 import nl.drbreakalot.lichtstad.ui.theme.LichtstadTheme
 import org.koin.androidx.compose.koinViewModel
@@ -38,9 +41,14 @@ fun MainContent(
     val navController = rememberNavController()
     LaunchedEffect(navController) {
         navController.addOnDestinationChangedListener { controller, destination, bundle ->
-            navigationViewModel.activeNavigationItem = navigationItems.single { item -> destination.hierarchy.any { it.route == item.route } }
+            navigationViewModel.activeNavigationItem =
+                navigationItems.single { item -> destination.hierarchy.any { it.route == item.route } }
         }
     }
+    navigationViewModel.navigation.onEach { (route, options) ->
+        println("Navigating to $route")
+        navController.navigate(route, options)
+    }.collectAsStateWithLifecycle(Unit)
     LichtstadTheme(
         navigationViewModel = navigationViewModel,
     ) {
@@ -63,9 +71,7 @@ fun MainContent(
             Surface(Modifier.padding(paddingValues)) {
                 NavHost(navController = navController, startDestination = ROUTE_DEFAULT) {
                     navigationItems.forEach { item ->
-                        composable(item.route) {
-                            item.content()
-                        }
+                        item.generateGraph(this)
                     }
                 }
             }
@@ -76,7 +82,10 @@ fun MainContent(
 
 @ExperimentalMaterial3Api
 @Composable
-private fun TopBar(navigationViewModel: NavigationViewModel = koinViewModel(), scrollBehavior: TopAppBarScrollBehavior) {
+private fun TopBar(
+    navigationViewModel: NavigationViewModel = koinViewModel(),
+    scrollBehavior: TopAppBarScrollBehavior
+) {
     TopAppBar(
         title = { Text(navigationViewModel.activeNavigationItem.title()) },
         navigationIcon = {
@@ -117,13 +126,15 @@ private fun BottomBar(
                     selected = selected,
                     alwaysShowLabel = false,
                     onClick = {
-                        navController.navigate(item.route) {
+                        navigationViewModel.navigate(item.route, navOptions {
+                            val isSameDestination =
+                                navController.currentDestination?.route == item.route
                             popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = true
+                                saveState = !isSameDestination
                             }
                             launchSingleTop = true
-                            restoreState = true
-                        }
+                            restoreState = !isSameDestination
+                        })
                     },
                     icon = {
                         Icon(painter = item.icon(), contentDescription = null)
@@ -141,7 +152,8 @@ private fun BottomBar(
 private fun TintSystemBars() {
     val statusBarColor = MaterialTheme.colorScheme.primary
     val darkStatusIcons = remember { statusBarColor.luminance() > 0.5 }
-    val navigationBarColor = MaterialTheme.colorScheme.surfaceColorAtElevation(NavigationBarDefaults.Elevation)
+    val navigationBarColor =
+        MaterialTheme.colorScheme.surfaceColorAtElevation(NavigationBarDefaults.Elevation)
     val darkNavigationIcons = remember { navigationBarColor.luminance() > 0.5 }
     val systemUiController = rememberSystemUiController()
 
