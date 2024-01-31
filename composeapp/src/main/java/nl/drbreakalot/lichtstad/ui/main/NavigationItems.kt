@@ -63,7 +63,8 @@ val NAVIGATION_ITEMS = listOf(
                 content = { backstackEntry ->
                     val year = backstackEntry.arguments?.getString("year")!!
                     val key = backstackEntry.arguments?.getString("key")!!
-                    Album(year, key)}
+                    Album(year, key)
+                }
             )
         )
     ),
@@ -83,14 +84,15 @@ val NAVIGATION_ITEMS = listOf(
     ),
 )
 
-class NavigationViewModel(private val navigationService: NavigationService) : ViewModel() {
+class NavigationViewModel(val navigationService: NavigationService) : ViewModel() {
 
     var activeNavigationItem: NavigationItem by mutableStateOf(NAVIGATION_ITEMS[0])
     val navigation = navigationService.navigation
     fun navigate(route: String, navOptions: NavOptions? = null) {
-        viewModelScope.launch {
-            navigationService.navigate(route, navOptions)
-        }
+        navigationService.navigate(route, navOptions, false)
+    }
+    fun notifyAutomaticNavigationHappened(route: String) {
+        navigationService.navigate(route, null, true)
     }
 
 }

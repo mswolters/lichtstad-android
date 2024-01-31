@@ -23,10 +23,22 @@ data class NavigationItem(
 
     fun generateGraph(navGraphBuilder: NavGraphBuilder, parentRoute: String = "") {
         with(navGraphBuilder) {
-            val baseRoute = if (parentRoute.isEmpty()) this@NavigationItem.route else "$parentRoute/${this@NavigationItem.route}"
-            navigation("$baseRoute/", baseRoute) {
-                composable("$baseRoute/", arguments = arguments) { backstackEntry -> content(backstackEntry) }
-                children.forEach { it.generateGraph(this) }
+            val baseRoute = if (parentRoute.isEmpty()) {
+                this@NavigationItem.route
+            } else {
+                "$parentRoute/${this@NavigationItem.route}"
+            }
+            if (children.isEmpty()) {
+                composable(baseRoute, arguments = arguments) { backstackEntry ->
+                    content(backstackEntry)
+                }
+            } else {
+                navigation("$baseRoute/", baseRoute) {
+                    composable("$baseRoute/", arguments = arguments) { backstackEntry ->
+                        content(backstackEntry)
+                    }
+                    children.forEach { it.generateGraph(this) }
+                }
             }
         }
     }

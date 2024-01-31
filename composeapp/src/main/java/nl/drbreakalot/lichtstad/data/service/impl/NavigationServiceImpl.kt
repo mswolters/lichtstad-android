@@ -11,7 +11,7 @@ class NavigationServiceImpl : NavigationService {
     private val mutableNavigation = MutableStateFlow(NavigationData(NAVIGATION_ITEMS[0].route))
     override val navigation: Flow<NavigationData> = mutableNavigation
 
-    override suspend fun navigate(route: String, navOptions: NavOptions?) {
-        mutableNavigation.emit(NavigationData(route, navOptions))
+    override fun navigate(route: String, navOptions: NavOptions?, isAutomaticAction: Boolean) {
+        mutableNavigation.compareAndSet(mutableNavigation.value, NavigationData(route, navOptions, isAutomaticAction))
     }
 }

@@ -7,8 +7,8 @@ interface NavigationService {
 
     val navigation: Flow<NavigationData>
 
-    suspend fun navigate(route: String, navOptions: NavOptions? = null)
+    fun navigate(route: String, navOptions: NavOptions? = null, isAutomaticAction: Boolean = false)
 
 }
 
-data class NavigationData(val route: String, val navOptions: NavOptions? = null)
+data class NavigationData(val route: String, val navOptions: NavOptions? = null, val isAutomaticAction: Boolean = false)

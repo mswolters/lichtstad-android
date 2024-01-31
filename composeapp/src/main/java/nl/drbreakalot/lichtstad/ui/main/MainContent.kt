@@ -1,6 +1,7 @@
 package nl.drbreakalot.lichtstad.ui.main
 
 import android.content.res.Configuration.ORIENTATION_LANDSCAPE
+import android.util.Log
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.navigationBarsPadding
@@ -22,7 +23,6 @@ import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navOptions
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
@@ -30,6 +30,7 @@ import kotlinx.coroutines.flow.onEach
 import nl.drbreakalot.lichtstad.ui.component.FlexibleNavigationBar
 import nl.drbreakalot.lichtstad.ui.theme.LichtstadTheme
 import org.koin.androidx.compose.koinViewModel
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -43,11 +44,20 @@ fun MainContent(
         navController.addOnDestinationChangedListener { controller, destination, bundle ->
             navigationViewModel.activeNavigationItem =
                 navigationItems.single { item -> destination.hierarchy.any { it.route == item.route } }
+            if (destination.route != null) {
+                navigationViewModel.notifyAutomaticNavigationHappened(destination.route!!)
+            }
         }
     }
-    navigationViewModel.navigation.onEach { (route, options) ->
-        println("Navigating to $route")
-        navController.navigate(route, options)
+    navigationViewModel.navigation.onEach { (route, options, isAutomatic) ->
+        if (isAutomatic) {
+            Log.d("MainContent", "Ignoring automatic navigation to $route")
+            return@onEach
+        }
+        if (navController.currentDestination != null) {
+            Log.d("MainContent", "Navigating to $route")
+            navController.navigate(route, options)
+        }
     }.collectAsStateWithLifecycle(Unit)
     LichtstadTheme(
         navigationViewModel = navigationViewModel,
@@ -76,7 +86,6 @@ fun MainContent(
                 }
             }
         }
-
     }
 }
 
@@ -127,13 +136,14 @@ private fun BottomBar(
                     alwaysShowLabel = false,
                     onClick = {
                         navigationViewModel.navigate(item.route, navOptions {
-                            val isSameDestination =
-                                navController.currentDestination?.route == item.route
+                            val isSameDestinationStack =
+                                navController.currentDestination?.hierarchy?.any { it.route == item.route }
+                                    ?: false
                             popUpTo(navController.graph.findStartDestination().id) {
-                                saveState = !isSameDestination
+                                saveState = !isSameDestinationStack
                             }
                             launchSingleTop = true
-                            restoreState = !isSameDestination
+                            restoreState = !isSameDestinationStack
                         })
                     },
                     icon = {

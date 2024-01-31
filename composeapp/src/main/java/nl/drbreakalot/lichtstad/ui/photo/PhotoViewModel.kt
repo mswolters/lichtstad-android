@@ -18,11 +18,7 @@ class PhotoViewModel(private val service: PhotoService, private val navigationSe
     fun photos(year: String, albumKey: String) = service.photos(year, albumKey)
 
     fun onClicked(album: Album) {
-        viewModelScope.launch {
-            navigationService.navigate(routeAlbum(album.year, album.key), navOptions {
-                popUpTo(ROUTE_PHOTOS)
-            })
-        }
+        navigationService.navigate(routeAlbum(album.year, album.key))
     }
 
 }
