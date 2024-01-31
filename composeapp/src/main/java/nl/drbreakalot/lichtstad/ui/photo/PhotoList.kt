@@ -26,8 +26,8 @@ fun Album(year: String, key: String, viewModel: PhotoViewModel = koinNavViewMode
 fun PhotoList(photos: List<Photo>, onPhotoClick: (Photo) -> Unit) {
     LazyVerticalGrid(
         columns = GridCells.Adaptive(80.dp),
-        verticalArrangement = Arrangement.spacedBy(8.dp),
-        horizontalArrangement = Arrangement.spacedBy(8.dp)
+        verticalArrangement = Arrangement.spacedBy(4.dp),
+        horizontalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         items(photos, key = { photo -> photo.key }) {
             PhotoItem(photo = it, onClick = { onPhotoClick(it) })

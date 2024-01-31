@@ -16,10 +16,9 @@ fun VideoList(
     modifier: Modifier = Modifier,
     onVideoClick: (Video) -> Unit
 ) {
-    //TODO not fixed on tablets/wiiide phones
     LazyVerticalStaggeredGrid(
         modifier = modifier,
-        columns = StaggeredGridCells.Fixed(2),
+        columns = StaggeredGridCells.Adaptive(180.dp),
         contentPadding = PaddingValues(8.dp),
         verticalItemSpacing = 8.dp,
         horizontalArrangement = Arrangement.spacedBy(8.dp)
